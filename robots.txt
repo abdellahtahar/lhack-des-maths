@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lhackdesmaths.com/sitemap.xml
+Sitemap: https://abdellahtahar.com/sitemap.xml
