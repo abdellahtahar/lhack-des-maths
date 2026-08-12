@@ -33,9 +33,20 @@ window.CAHIER = {
     },
 
     {
-      titre: 'Dérivation et étude de fonctions',
+      titre: 'Dérivation',
       niveau: '2bac',
       symbole: 'f′',
+      type: 'cours',
+      resume: '',
+      pages: 0,
+      fichier: '',
+      poids: ''
+    },
+
+    {
+      titre: 'Étude de fonctions',
+      niveau: '2bac',
+      symbole: 'f(x)',
       type: 'cours',
       resume: '',
       pages: 0,
