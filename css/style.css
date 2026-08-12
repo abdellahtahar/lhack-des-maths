@@ -479,6 +479,93 @@ button,input,select{font:inherit;color:inherit}
   .partie-tete p{grid-column:1 / -1}
 }
 
+/* ───── 7ter. ÉCRAN DE CHOIX (page niveau) ───── */
+.fil-simple{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:var(--e4);
+  font-family:var(--mono);font-size:var(--t-xs);color:var(--graphite);
+}
+.fil-simple a:hover{color:var(--cobalt)}
+.fil-simple span[aria-hidden]{opacity:.5}
+
+.choix{display:grid;gap:var(--e3);margin-top:var(--e5)}
+.carte-choix{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--r-xl);
+  padding:var(--e5) var(--e4) var(--e4);
+  transition:transform var(--tempo),box-shadow var(--tempo),border-color var(--tempo);
+}
+.carte-choix::before{
+  content:"";position:absolute;inset:0;background-image:var(--quadrillage);
+  background-size:var(--carreau) var(--carreau);opacity:.6;pointer-events:none;
+}
+.carte-choix::after{ /* trait de marge */
+  content:"";position:absolute;left:26px;top:0;bottom:0;width:1.5px;background:rgba(232,70,75,.28);
+}
+.carte-choix>*{position:relative}
+.carte-choix:hover{transform:translateY(-6px);box-shadow:var(--ombre-2);border-color:var(--encre)}
+
+.choix-signe{
+  width:58px;height:58px;border-radius:16px;display:grid;place-items:center;
+  background:var(--encre);color:var(--lime);font-family:var(--titre);font-size:1.5rem;font-weight:700;
+  transition:transform var(--tempo);
+}
+.carte-choix:hover .choix-signe{transform:rotate(-8deg) scale(1.05)}
+.choix-nb{
+  position:absolute;right:0;top:4px;font-family:var(--mono);font-size:var(--t-xs);font-weight:600;
+  color:var(--encre);background:var(--lime);padding:7px 13px;border-radius:999px;
+}
+.carte-choix h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2rem);margin-top:var(--e3)}
+.carte-choix p{color:var(--graphite);font-size:var(--t-sm);margin-top:10px;max-width:46ch}
+
+.choix-apercu{display:flex;flex-wrap:wrap;gap:7px;margin-top:var(--e4);margin-bottom:var(--e4)}
+.choix-apercu span{
+  font-family:var(--mono);font-size:.6875rem;color:var(--graphite);background:var(--papier-2);
+  border:1px solid var(--trait);padding:6px 11px;border-radius:999px;
+}
+.choix-apercu .plus{background:var(--encre);color:var(--papier);border-color:var(--encre)}
+
+.choix-aller{
+  display:inline-flex;align-items:center;gap:10px;margin-top:auto;padding-top:var(--e3);
+  border-top:1px solid var(--trait);font-family:var(--titre);font-weight:600;color:var(--cobalt);
+  font-size:var(--t-sm);
+}
+.choix-aller svg{width:17px;height:17px;transition:transform var(--tempo)}
+.carte-choix:hover .choix-aller svg{transform:translateX(5px)}
+
+/* chaque partie garde sa couleur */
+#c-exercices .choix-signe{background:var(--cobalt);color:#fff}
+#c-exercices .choix-nb{background:var(--cobalt-voile);color:var(--cobalt)}
+#c-controles .choix-signe{background:var(--rouge);color:#fff}
+#c-controles .choix-nb{background:var(--rouge-voile);color:var(--rouge)}
+
+.choix-pied{margin-top:var(--e5)}
+
+.autres-niveaux{display:flex;flex-wrap:wrap;gap:9px}
+.autres-niveaux a{
+  display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 18px;border-radius:999px;
+  background:var(--carte);border:1.5px solid var(--trait);font-family:var(--titre);
+  font-weight:600;font-size:var(--t-sm);transition:var(--tempo);
+}
+.autres-niveaux a:hover{border-color:var(--encre);transform:translateY(-2px)}
+.autres-niveaux a.ici{background:var(--encre);color:var(--papier);border-color:var(--encre)}
+.autres-niveaux b{
+  font-family:var(--mono);font-size:var(--t-xs);font-weight:600;color:var(--cobalt);
+  background:var(--cobalt-voile);padding:3px 8px;border-radius:999px;
+}
+.autres-niveaux a.ici b{background:rgba(255,255,255,.16);color:var(--lime)}
+
+/* onglets de partie dans la bibliothèque */
+.onglets-partie{margin-top:var(--e3);width:100%}
+.onglets-partie button[aria-selected="true"]{background:var(--cobalt);color:#fff}
+
+@media(min-width:760px){
+  .choix{grid-template-columns:1fr 1fr}
+  .carte-choix{padding:var(--e5)}
+}
+@media(min-width:1100px){
+  .choix{grid-template-columns:repeat(3,1fr)}
+}
+
 /* ───── 8. MÉTHODE ───── */
 .methode{display:grid;gap:var(--e6)}
 .pas-liste{display:grid;gap:var(--e2);counter-reset:pas}

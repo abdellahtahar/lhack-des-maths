@@ -102,6 +102,52 @@
     t._m = setTimeout(() => t.classList.remove('vu'), 2800);
   };
 
+  /* ═════════ PAGE NIVEAU — l'écran de choix ═════════ */
+  const dataN = window.CAHIER;
+  const choix = document.getElementById('choix');
+  if (dataN && choix) {
+    const n = new URLSearchParams(location.search).get('n');
+    const niv = dataN.niveaux[n];
+
+    if (!niv) { location.replace('bibliotheque.html'); return; }
+
+    document.title = `${niv.long} — L'Hack Des Maths`;
+    document.getElementById('filNiveau').textContent = niv.long;
+    document.getElementById('niveauTag').textContent = niv.long;
+
+    const fleche = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>`;
+
+    const cartes = dataN.sections.map(sec => {
+      const docs = dataN.documents.filter(d => d.niveau === n && sec.types.includes(d.type));
+      if (!docs.length) return '';
+      const pretes = docs.filter(d => d.fichier).length;
+      const apercu = docs.slice(0, 4).map(d => `<span>${d.titre.split(' — ')[0]}</span>`).join('');
+      return `
+        <a class="carte-choix" id="c-${sec.id}" href="bibliotheque.html?niveau=${n}&partie=${sec.id}">
+          <span class="choix-signe" aria-hidden="true">${sec.symbole}</span>
+          <span class="choix-nb">${docs.length} document${docs.length > 1 ? 's' : ''}</span>
+          <h2>${sec.titre}</h2>
+          <p>${sec.intro}</p>
+          <div class="choix-apercu">${apercu}${docs.length > 4 ? `<span class="plus">+${docs.length - 4}</span>` : ''}</div>
+          <span class="choix-aller">${pretes ? 'Télécharger' : 'Voir la liste'} ${fleche}</span>
+        </a>`;
+    }).join('');
+
+    choix.innerHTML = cartes;
+
+    // les autres niveaux, pour changer sans repasser par l'accueil
+    const autres = document.getElementById('autresNiveaux');
+    if (autres) {
+      autres.innerHTML = Object.keys(dataN.niveaux).map(k => {
+        const nb = dataN.documents.filter(d => d.niveau === k).length;
+        return `<a class="${k === n ? 'ici' : ''}" href="niveau.html?n=${k}">
+                  ${dataN.niveaux[k].long}<b>${nb}</b>
+                </a>`;
+      }).join('');
+    }
+    return;
+  }
+
   /* ═════════ BIBLIOTHÈQUE ═════════ */
   const data    = window.CAHIER;
   const conteneur = document.getElementById('parties');
@@ -116,7 +162,7 @@
   const raccourcis = document.getElementById('raccourcis');
   const limite  = parseInt(conteneur.dataset.limite || '0', 10); // 0 = tout
 
-  const etat = { niveau: 'tous', q: '' };
+  const etat = { niveau: 'tous', partie: 'toutes', q: '' };
   const sansAccent = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
   const iconeDL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>`;
@@ -179,14 +225,22 @@
   function afficher() {
     const q = sansAccent(etat.q.trim());
 
+    const typesVisibles = etat.partie === 'toutes'
+      ? null
+      : data.sections.find(s => s.id === etat.partie)?.types || null;
+
     const retenus = data.documents.filter(d => {
       const texte = sansAccent(`${d.titre} ${d.resume} ${data.types[d.type]} ${data.niveaux[d.niveau].long}`);
-      return (etat.niveau === 'tous' || d.niveau === etat.niveau) && (!q || texte.includes(q));
+      return (etat.niveau === 'tous' || d.niveau === etat.niveau)
+          && (!typesVisibles || typesVisibles.includes(d.type))
+          && (!q || texte.includes(q));
     });
 
     const blocs = [];
     const liens = [];
-    data.sections.forEach(sec => {
+    data.sections
+      .filter(sec => etat.partie === 'toutes' || sec.id === etat.partie)
+      .forEach(sec => {
       let docs = retenus.filter(d => sec.types.includes(d.type));
       if (!docs.length) return;
       const total = docs.length;
@@ -207,8 +261,23 @@
   onglets.forEach(b => b.addEventListener('click', () => {
     etat.niveau = b.dataset.niveau;
     onglets.forEach(o => o.setAttribute('aria-selected', String(o === b)));
-    afficher();
+    majURL(); afficher();
   }));
+
+  const ongletsPartie = document.querySelectorAll('[data-partie]');
+  ongletsPartie.forEach(b => b.addEventListener('click', () => {
+    etat.partie = b.dataset.partie;
+    ongletsPartie.forEach(o => o.setAttribute('aria-selected', String(o === b)));
+    majURL(); afficher();
+  }));
+
+  function majURL() {
+    const p = new URLSearchParams();
+    if (etat.niveau !== 'tous') p.set('niveau', etat.niveau);
+    if (etat.partie !== 'toutes') p.set('partie', etat.partie);
+    const q = p.toString();
+    history.replaceState({}, '', q ? `bibliotheque.html?${q}` : 'bibliotheque.html');
+  }
 
   let m;
   champ?.addEventListener('input', () => {
@@ -224,24 +293,25 @@
   });
 
   document.getElementById('toutVoir')?.addEventListener('click', () => {
-    etat.niveau = 'tous'; etat.q = '';
+    etat.niveau = 'tous'; etat.partie = 'toutes'; etat.q = '';
     if (champ) { champ.value = ''; boite?.classList.remove('plein'); }
     onglets.forEach(o => o.setAttribute('aria-selected', String(o.dataset.niveau === 'tous')));
-    afficher();
+    document.querySelectorAll('[data-partie]').forEach(o => o.setAttribute('aria-selected', String(o.dataset.partie === 'toutes')));
+    majURL(); afficher();
   });
 
-  // niveau et partie passés dans l'URL : bibliotheque.html?niveau=2bac#exercices
-  const p = new URLSearchParams(location.search).get('niveau');
-  if (p && data.niveaux[p]) {
-    etat.niveau = p;
-    onglets.forEach(o => o.setAttribute('aria-selected', String(o.dataset.niveau === p)));
+  // bibliotheque.html?niveau=2bac&partie=exercices
+  const url = new URLSearchParams(location.search);
+  const pn = url.get('niveau');
+  if (pn && data.niveaux[pn]) {
+    etat.niveau = pn;
+    onglets.forEach(o => o.setAttribute('aria-selected', String(o.dataset.niveau === pn)));
+  }
+  const pp = url.get('partie');
+  if (pp && data.sections.some(s => s.id === pp)) {
+    etat.partie = pp;
+    document.querySelectorAll('[data-partie]').forEach(o => o.setAttribute('aria-selected', String(o.dataset.partie === pp)));
   }
 
   afficher();
-
-  // si l'URL vise une partie, on s'y rend une fois le rendu terminé
-  if (location.hash) {
-    const cible = document.getElementById(location.hash.slice(1));
-    if (cible) setTimeout(() => cible.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
-  }
 })();

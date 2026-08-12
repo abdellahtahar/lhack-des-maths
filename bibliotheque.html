@@ -91,7 +91,14 @@
         </div>
       </div>
 
-      <p class="compte-res" id="nb" aria-live="polite" style="margin-bottom:1.25rem">23 documents</p>
+      <div class="onglets onglets-partie" role="tablist" aria-label="Choisir une partie">
+        <button type="button" role="tab" data-partie="toutes"   aria-selected="true">Tout</button>
+        <button type="button" role="tab" data-partie="resumes"  aria-selected="false">§ Résumés de cours</button>
+        <button type="button" role="tab" data-partie="exercices" aria-selected="false">✎ Exercices</button>
+        <button type="button" role="tab" data-partie="controles" aria-selected="false">★ Contrôles</button>
+      </div>
+
+      <p class="compte-res" id="nb" aria-live="polite" style="margin:1.25rem 0">23 documents</p>
 
       <nav class="raccourcis" id="raccourcis" aria-label="Aller à une partie"></nav>
 

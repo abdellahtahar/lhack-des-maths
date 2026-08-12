@@ -20,7 +20,8 @@ annotations manuscrites reviennent partout — c'est l'identité visuelle du sit
 ```
 .
 ├── index.html            Accueil (cahier, niveaux, aperçu, méthode, qui suis-je, contact)
-├── bibliotheque.html     Résumés / Exercices / Contrôles, par niveau + recherche
+├── niveau.html           Écran de choix : Résumés / Exercices / Contrôles
+├── bibliotheque.html     La liste, filtrable par niveau ET par partie
 ├── css/style.css         Design system complet
 ├── js/
 │   ├── data.js           ⭐ TOUS LES DOCUMENTS SONT ICI
@@ -31,6 +32,23 @@ annotations manuscrites reviennent partout — c'est l'identité visuelle du sit
 ├── pdf/                  Tes fichiers PDF
 ├── favicon.svg · site.webmanifest · robots.txt · sitemap.xml · _headers
 ```
+
+---
+
+## Le parcours d'un élève
+
+```
+Accueil  →  clic sur « 2ème Bac »
+         →  niveau.html?n=2bac      ÉCRAN DE CHOIX
+                                     ┌─ Résumés de cours  (5)
+                                     ├─ Exercices         (5)
+                                     └─ Contrôles         (2)
+         →  bibliotheque.html?niveau=2bac&partie=exercices
+                                     la liste filtrée, prête à télécharger
+```
+
+L'élève ne voit jamais tout mélangé : il choisit d'abord son niveau,
+puis ce dont il a besoin.
 
 ---
 
