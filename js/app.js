@@ -103,9 +103,9 @@
   };
 
   /* ═════════ BIBLIOTHÈQUE ═════════ */
-  const data   = window.CAHIER;
-  const grille = document.getElementById('fiches');
-  if (!data || !grille) return;
+  const data    = window.CAHIER;
+  const conteneur = document.getElementById('parties');
+  if (!data || !conteneur) return;
 
   const champ   = document.getElementById('chercher');
   const boite   = document.querySelector('.chercher');
@@ -113,7 +113,8 @@
   const rien    = document.getElementById('rien');
   const nb      = document.getElementById('nb');
   const onglets = document.querySelectorAll('[data-niveau]');
-  const limite  = parseInt(grille.dataset.limite || '0', 10); // 0 = tout
+  const raccourcis = document.getElementById('raccourcis');
+  const limite  = parseInt(conteneur.dataset.limite || '0', 10); // 0 = tout
 
   const etat = { niveau: 'tous', q: '' };
   const sansAccent = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -156,20 +157,51 @@
     return el;
   }
 
+  /* Une partie = un bloc « Résumés de cours » ou « Exercices » */
+  function partie(sec, docs) {
+    const bloc = document.createElement('section');
+    bloc.className = 'partie';
+    bloc.id = sec.id;
+    bloc.innerHTML = `
+      <header class="partie-tete">
+        <span class="partie-signe" aria-hidden="true">${sec.symbole}</span>
+        <div>
+          <h2>${sec.titre}</h2>
+          <p>${sec.intro}</p>
+        </div>
+        <span class="partie-compte">${docs.length}</span>
+      </header>
+      <div class="fiches"></div>`;
+    bloc.querySelector('.fiches').replaceChildren(...docs.map(fiche));
+    return bloc;
+  }
+
   function afficher() {
     const q = sansAccent(etat.q.trim());
-    let liste = data.documents.filter(d => {
+
+    const retenus = data.documents.filter(d => {
       const texte = sansAccent(`${d.titre} ${d.resume} ${data.types[d.type]} ${data.niveaux[d.niveau].long}`);
       return (etat.niveau === 'tous' || d.niveau === etat.niveau) && (!q || texte.includes(q));
     });
 
-    const total = liste.length;
-    if (limite) liste = liste.slice(0, limite);
+    const blocs = [];
+    const liens = [];
+    data.sections.forEach(sec => {
+      let docs = retenus.filter(d => sec.types.includes(d.type));
+      if (!docs.length) return;
+      const total = docs.length;
+      if (limite) docs = docs.slice(0, limite);
+      blocs.push(partie(sec, docs));
+      liens.push(`<a href="#${sec.id}">${sec.titre} <b>${total}</b></a>`);
+    });
 
-    grille.replaceChildren(...liste.map(fiche));
-    grille.hidden = total === 0;
-    if (rien) rien.hidden = total !== 0;
-    if (nb) nb.textContent = `${total} document${total > 1 ? 's' : ''}`;
+    conteneur.replaceChildren(...blocs);
+    if (rien) rien.hidden = retenus.length !== 0;
+    if (nb) nb.textContent = `${retenus.length} document${retenus.length > 1 ? 's' : ''}`;
+    if (raccourcis) {
+      raccourcis.innerHTML = liens.length > 1 ? liens.join('') : '';
+      raccourcis.hidden = liens.length < 2;
+    }
   }
 
   onglets.forEach(b => b.addEventListener('click', () => {
@@ -198,7 +230,7 @@
     afficher();
   });
 
-  // niveau passé dans l'URL : bibliotheque.html?niveau=2bac
+  // niveau et partie passés dans l'URL : bibliotheque.html?niveau=2bac#exercices
   const p = new URLSearchParams(location.search).get('niveau');
   if (p && data.niveaux[p]) {
     etat.niveau = p;
@@ -206,4 +238,10 @@
   }
 
   afficher();
+
+  // si l'URL vise une partie, on s'y rend une fois le rendu terminé
+  if (location.hash) {
+    const cible = document.getElementById(location.hash.slice(1));
+    if (cible) setTimeout(() => cible.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+  }
 })();

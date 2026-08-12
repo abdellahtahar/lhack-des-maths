@@ -20,7 +20,7 @@ annotations manuscrites reviennent partout — c'est l'identité visuelle du sit
 ```
 .
 ├── index.html            Accueil (cahier, niveaux, aperçu, méthode, qui suis-je, contact)
-├── bibliotheque.html     Tous les PDF (onglets par niveau + recherche)
+├── bibliotheque.html     Résumés / Exercices / Contrôles, par niveau + recherche
 ├── css/style.css         Design system complet
 ├── js/
 │   ├── data.js           ⭐ TOUS LES DOCUMENTS SONT ICI
@@ -34,25 +34,43 @@ annotations manuscrites reviennent partout — c'est l'identité visuelle du sit
 
 ---
 
+## Les deux parties
+
+Pour chaque niveau, la bibliothèque est coupée en parties bien distinctes :
+
+| Partie | Contenu | Repère visuel |
+|---|---|---|
+| **Résumés de cours** | L'essentiel du chapitre en 3–4 pages | badge lime |
+| **Exercices** | Séries progressives corrigées | badge cobalt |
+| **Contrôles & formulaires** | Devoirs surveillés, formulaires | badge rouge |
+
+C'est le champ `type` d'un document qui décide **tout seul** dans quelle partie
+il apparaît. Tu n'as rien d'autre à faire.
+
+---
+
 ## Ajouter un document PDF
 
 **Deux étapes, c'est tout.**
 
-1. Dépose ton fichier dans `pdf/`, par exemple `pdf/2bac-exponentielle-cours.pdf`
+1. Dépose ton fichier dans `pdf/`, par exemple `pdf/2bac-exponentielle-resume.pdf`
 2. Ouvre `js/data.js` et remplis `fichier` + `poids` :
 
 ```js
 {
-  titre:'Fonction exponentielle — Cours complet',
-  niveau:'2bac',                 // '2bac' | '1bac' | 'tc' | 'college'
-  symbole:'eˣ',                  // s'affiche sur la vignette
-  type:'cours',                  // 'cours' | 'exercices' | 'controle' | 'formulaire'
-  resume:"Définition, propriétés, limites et étude de fonctions.",
-  pages:12,
-  fichier:'pdf/2bac-exponentielle-cours.pdf',
-  poids:'1,2 Mo'
+  titre:'Fonction exponentielle',
+  niveau:'2bac',        // '2bac' | '1bac' | 'tc' | 'college'
+  symbole:'eˣ',         // s'affiche sur la vignette
+  type:'resume',        // 'resume' | 'exercices' | 'controle' | 'formulaire'
+  resume:"Définition, propriétés, limites et dérivation — l'essentiel en 4 pages.",
+  pages:4,
+  fichier:'pdf/2bac-exponentielle-resume.pdf',
+  poids:'820 Ko'
 }
 ```
+
+Le `type` place la fiche dans la bonne partie :
+`resume` → Résumés de cours · `exercices` → Exercices · `controle` / `formulaire` → Contrôles & formulaires
 
 Le bouton « Télécharger » s'active automatiquement. Tant que `fichier` reste vide
 (`''`), la fiche s'affiche en **« Bientôt »** — pratique pour annoncer un document

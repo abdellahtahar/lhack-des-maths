@@ -63,11 +63,11 @@
 /* ───── 2. BASE ───── */
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--entete) + 20px);-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--entete) + 20px);-webkit-text-size-adjust:100%;overflow-x:clip}
 body{
   margin:0;background:var(--papier);color:var(--encre);
   font-family:var(--corps);font-size:var(--t-md);line-height:1.65;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;overflow-x:clip;width:100%;
 }
 h1,h2,h3,h4{font-family:var(--titre);margin:0;line-height:1.05;letter-spacing:-.035em;font-weight:700}
 h1{font-size:var(--t-h1)}
@@ -150,7 +150,7 @@ button,input,select{font:inherit;color:inherit}
 .entete.colle{background:rgba(251,250,246,.86);backdrop-filter:blur(20px) saturate(140%);box-shadow:0 1px 0 var(--trait)}
 .entete-in{min-height:var(--entete);display:flex;align-items:center;justify-content:space-between;gap:16px}
 
-.logo{display:inline-flex;align-items:center;gap:11px}
+.logo{display:inline-flex;align-items:center;gap:11px;min-height:44px}
 .logo-signe{
   width:40px;height:40px;flex:0 0 auto;border-radius:11px;background:var(--encre);color:var(--lime);
   display:grid;place-items:center;font-family:var(--titre);font-size:1.05rem;font-weight:700;
@@ -207,6 +207,8 @@ button,input,select{font:inherit;color:inherit}
 
 /* ── Le cahier qui s'ouvre ── */
 .cahier-scene{perspective:2200px;max-width:520px;width:100%;margin-inline:auto;position:relative}
+.cahier{overflow:visible}
+@media(max-width:759px){.cahier-scene{overflow-x:clip;padding-block:4px}}
 .cahier{
   position:relative;aspect-ratio:4/5;border-radius:6px var(--r-md) var(--r-md) 6px;
   transform-style:preserve-3d;box-shadow:var(--ombre-3);
@@ -433,6 +435,50 @@ button,input,select{font:inherit;color:inherit}
 .rien .signe{font-family:var(--titre);font-size:3rem;color:var(--cobalt)}
 .rien p{color:var(--graphite);font-size:var(--t-sm);max-width:38ch}
 
+/* ───── 7bis. PARTIES (Résumés / Exercices) ───── */
+.raccourcis{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--e5)}
+.raccourcis a{
+  display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border-radius:999px;
+  background:var(--carte);border:1.5px solid var(--trait);font-family:var(--titre);
+  font-weight:600;font-size:var(--t-sm);transition:var(--tempo);
+}
+.raccourcis a:hover{border-color:var(--encre);transform:translateY(-2px)}
+.raccourcis b{
+  font-family:var(--mono);font-size:var(--t-xs);font-weight:600;color:var(--cobalt);
+  background:var(--cobalt-voile);padding:3px 8px;border-radius:999px;
+}
+
+.parties{display:grid;gap:var(--e7)}
+.partie{scroll-margin-top:calc(var(--entete) + 20px)}
+.partie-tete{
+  position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:var(--e3);
+  align-items:start;padding-bottom:var(--e4);margin-bottom:var(--e4);
+  border-bottom:2px solid var(--encre);
+}
+.partie-signe{
+  width:46px;height:46px;flex:0 0 auto;border-radius:13px;background:var(--encre);color:var(--lime);
+  display:grid;place-items:center;font-family:var(--titre);font-size:1.25rem;font-weight:700;
+}
+.partie-tete h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.125rem)}
+.partie-tete p{color:var(--graphite);font-size:var(--t-sm);max-width:58ch;margin-top:8px}
+.partie-compte{
+  font-family:var(--mono);font-size:var(--t-sm);font-weight:600;color:var(--encre);
+  background:var(--lime);padding:7px 14px;border-radius:999px;white-space:nowrap;
+}
+/* la partie Exercices se distingue au premier coup d'œil */
+#exercices .partie-signe{background:var(--cobalt);color:#fff}
+#exercices .partie-compte{background:var(--cobalt-voile);color:var(--cobalt)}
+#exercices .fiche-niveau{background:var(--cobalt);color:#fff}
+#controles .partie-signe{background:var(--rouge);color:#fff}
+#controles .partie-compte{background:var(--rouge-voile);color:var(--rouge)}
+#controles .fiche-niveau{background:var(--rouge);color:#fff}
+
+@media(max-width:759px){
+  .partie-tete{grid-template-columns:auto 1fr;row-gap:12px}
+  .partie-compte{grid-column:1 / -1;justify-self:start}
+  .partie-tete p{grid-column:1 / -1}
+}
+
 /* ───── 8. MÉTHODE ───── */
 .methode{display:grid;gap:var(--e6)}
 .pas-liste{display:grid;gap:var(--e2);counter-reset:pas}
@@ -452,16 +498,18 @@ button,input,select{font:inherit;color:inherit}
 
 /* ───── 9. QUI SUIS-JE ───── */
 .moi{display:grid;gap:var(--e5);align-items:center}
-.moi-photo{position:relative;max-width:420px;width:100%;margin-inline:auto}
+.moi-photo{position:relative;max-width:340px;width:100%;margin-inline:auto}
+@media(min-width:760px){.moi-photo{max-width:420px}}
 .moi-photo img{
   width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 12%;
   border-radius:var(--r-xl);display:block;position:relative;z-index:1;
   filter:saturate(1.04) contrast(1.03);box-shadow:var(--ombre-3);
 }
 .moi-photo::before{ /* cadre décalé */
-  content:"";position:absolute;inset:18px -18px -18px 18px;border:2px solid var(--lime);
+  content:"";position:absolute;inset:14px -10px -14px 14px;border:2px solid var(--lime);
   border-radius:var(--r-xl);z-index:0;opacity:.85;
 }
+@media(min-width:760px){.moi-photo::before{inset:18px -18px -18px 18px}}
 .moi-vignette{
   position:absolute;z-index:2;left:-14px;bottom:26px;background:var(--lime);color:var(--encre);
   padding:14px 18px;border-radius:var(--r-md);box-shadow:var(--ombre-2);transform:rotate(-3deg);
@@ -511,6 +559,7 @@ button,input,select{font:inherit;color:inherit}
 .pied .logo-signe{background:var(--lime);color:var(--encre)}
 .pied p{font-size:var(--t-sm);margin-top:12px;max-width:36ch}
 .pied-liens{display:flex;flex-wrap:wrap;gap:20px;font-size:var(--t-sm);font-family:var(--titre);font-weight:500}
+.pied-liens a{display:inline-flex;align-items:center;min-height:38px}
 .pied-liens a:hover{color:var(--lime)}
 .pied-bas{font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.06em;padding-top:var(--e4);border-top:1px solid rgba(255,255,255,.1);margin-top:var(--e4);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 
