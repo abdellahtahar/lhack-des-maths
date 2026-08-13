@@ -3,127 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#141B34">
-<title>Choisir — L'Hack Des Maths</title>
-<meta name="description" content="Résumés de cours ou exercices corrigés : choisis ce dont tu as besoin pour ton niveau.">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="site.webmanifest">
+<title>Choisir un rayon — L'Hack Des Maths</title>
+<meta name="description" content="Cours, exercices ou devoirs : choisissez votre rayon pour ce niveau.">
+<meta name="theme-color" content="#0C0912">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236722A0'/><text x='50' y='72' font-size='64' font-family='Georgia' text-anchor='middle' fill='%23FFD900'>∑</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<a class="saut" href="#contenu">Aller au contenu</a>
-<div class="jauge" id="jauge"></div>
+<div id="slot-nav"></div>
 
-<header class="entete colle">
-  <div class="zone entete-in">
-    <a class="logo" href="index.html">
-      <span class="logo-signe" aria-hidden="true">∑</span>
-      <span class="logo-txt">L'Hack Des Maths<small>Abdellah Tahar</small></span>
-    </a>
-
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="index.html">Accueil</a>
-      <a class="ici" href="bibliotheque.html">Documents</a>
-      <a href="index.html#methode">Méthode</a>
-      <a href="index.html#moi">Qui suis-je</a>
+<section class="entete-page">
+  <div class="wrap">
+    <nav class="fil">
+      <a href="index.html">Accueil</a><i>/</i>
+      <a href="index.html#niveaux">Niveaux</a><i>/</i>
+      <b id="fil-niv">—</b>
     </nav>
+    <span class="badge-niv" id="badge">—</span>
+    <h1 id="titre">—</h1>
+    <p id="sous">—</p>
+  </div>
+</section>
 
-    <div class="outils">
-      <a class="btn btn-contour entete-cta" href="bibliotheque.html">Tout voir</a>
-      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
+<section class="section" style="padding-top:38px">
+  <div class="wrap">
+    <div class="rev" style="margin-bottom:28px">
+      <span class="kicker">Étape 2</span>
+      <h2 class="h-sec" style="font-size:clamp(24px,3.6vw,36px)">Qu'est-ce que tu cherches ?</h2>
+    </div>
+    <div class="grille-rayons" id="grille-rayons"></div>
+
+    <div class="rev" style="margin-top:44px; display:flex; gap:12px; flex-wrap:wrap; align-items:center">
+      <a href="bibliotheque.html" class="btn btn-3" id="btn-tout">Voir tous les documents de ce niveau</a>
+      <a href="index.html#niveaux" class="btn btn-ghost">← Changer de niveau</a>
     </div>
   </div>
+</section>
 
-  <div class="menu" id="menu">
-    <a href="index.html">Accueil</a>
-    <a href="bibliotheque.html">Tous les documents</a>
-    <a href="index.html#methode">Méthode</a>
-    <a href="index.html#moi">Qui suis-je</a>
-  </div>
-</header>
-
-<main id="contenu">
-  <section class="heros" style="padding-bottom:var(--e6)">
-    <div class="heros-fond" aria-hidden="true"></div>
-    <div class="zone" style="position:relative">
-
-      <nav class="fil-simple" aria-label="Fil d'Ariane">
-        <a href="index.html">Accueil</a>
-        <span aria-hidden="true">›</span>
-        <span id="filNiveau">Niveau</span>
-      </nav>
-
-      <span class="tag" id="niveauTag">Niveau</span>
-      <h1 id="niveauTitre" style="margin:1rem 0 .75rem">Choisis ce dont<br><em style="font-style:normal;color:var(--cobalt)">tu as besoin.</em></h1>
-      <p class="gris mesure" id="niveauSous">
-        Deux choses différentes, deux usages différents. Prends le résumé pour comprendre,
-        la série pour t'entraîner.
-      </p>
-
-      <div class="choix" id="choix"></div>
-
-      <div class="choix-pied">
-        <a class="lien" href="bibliotheque.html">Voir tous les niveaux d'un coup <span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sect" style="padding-top:0">
-    <div class="zone">
-      <span class="etiq" style="margin-bottom:1rem">Changer de niveau</span>
-      <nav class="autres-niveaux" id="autresNiveaux" aria-label="Autres niveaux"></nav>
-    </div>
-  </section>
-</main>
-
-<footer class="pied">
-  <div class="zone">
-    <div class="pied-grille">
-      <div>
-        <a class="logo" href="index.html">
-          <span class="logo-signe" aria-hidden="true">∑</span>
-          <span class="logo-txt">L'Hack Des Maths<small>Abdellah Tahar</small></span>
-        </a>
-        <p>Le cahier de maths ouvert à tous — du collège au baccalauréat.</p>
-      </div>
-      <div>
-        <span class="etiq" style="color:rgba(255,255,255,.4);margin-bottom:14px">Le site</span>
-        <nav class="pied-liens" style="flex-direction:column;gap:10px">
-          <a href="bibliotheque.html">Bibliothèque</a>
-          <a href="index.html#niveaux">Niveaux</a>
-          <a href="index.html#methode">Méthode</a>
-          <a href="index.html#moi">Qui suis-je</a>
-        </nav>
-      </div>
-      <div>
-        <span class="etiq" style="color:rgba(255,255,255,.4);margin-bottom:14px">Contact</span>
-        <nav class="pied-liens" style="flex-direction:column;gap:10px">
-          <a href="mailto:contact@lhackdesmaths.com">Email</a>
-          <a href="https://wa.me/212600000000" target="_blank" rel="noopener">WhatsApp</a>
-        </nav>
-      </div>
-    </div>
-    <div class="pied-bas">
-      <span>© <span id="an">2026</span> L'Hack Des Maths — Fès, Maroc</span>
-      <span>Comprendre. S'entraîner. Réussir.</span>
-    </div>
-  </div>
-</footer>
-
-<nav class="nav-basse" aria-label="Navigation mobile">
-  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/></svg>Accueil</a>
-  <a class="ici" href="bibliotheque.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v16H4zM14 4h6v16h-6z"/></svg>Documents</a>
-  <a href="index.html#niveaux"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Niveaux</a>
-  <a href="index.html#moi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Moi</a>
-</nav>
+<div id="slot-pied"></div>
 
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script>
+function avantInteractions(){
+  const slug = params.get('n');
+  const niv  = niveauParSlug(slug);
+
+  if (!niv){
+    document.getElementById('titre').textContent = 'Niveau introuvable';
+    document.getElementById('sous').textContent  = 'Reviens à l\'accueil pour choisir un niveau.';
+    document.getElementById('badge').style.display = 'none';
+    return;
+  }
+
+  document.title = niv.court + ' — L\'Hack Des Maths';
+  document.getElementById('fil-niv').textContent = niv.court;
+  document.getElementById('badge').textContent   = niv.court;
+  document.getElementById('titre').innerHTML     = niv.nom + ' <span class="violet-txt">' + niv.sous + '</span>';
+  const n = nbDocs(slug);
+  document.getElementById('sous').textContent =
+    n ? n + ' document' + (n>1?'s':'') + ' disponibles dans ce niveau.'
+      : 'Les documents de ce niveau arrivent très bientôt.';
+
+  document.getElementById('btn-tout').href = 'bibliotheque.html?n=' + slug;
+
+  rendreRayons('#grille-rayons', slug);
+}
+</script>
 </body>
 </html>

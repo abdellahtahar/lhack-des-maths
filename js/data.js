@@ -1,142 +1,125 @@
-/* ═══════════════════════════════════════════════════════════
-   L'HACK DES MATHS — Bibliothèque de documents
-   ───────────────────────────────────────────────────────────
-   C'EST LE SEUL FICHIER À MODIFIER POUR AJOUTER UN DOCUMENT.
+/* =====================================================================
+   L'HACK DES MATHS — BASE DE DONNÉES DU SITE
+   ---------------------------------------------------------------------
+   C'est le SEUL fichier à modifier pour ajouter du contenu.
+   Aucun autre fichier ne doit être touché.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1) LES NIVEAUX
+   --------------------------------------------------------------------- */
+const NIVEAUX = [
+  /* ---------- COLLÈGE ---------- */
+  { slug: "1apic",   nom: "1<sup>ère</sup> Année",     court: "1APIC",  cycle: "Collège", sous: "Collège — 1AC" },
+  { slug: "2apic",   nom: "2<sup>ème</sup> Année",     court: "2APIC",  cycle: "Collège", sous: "Collège — 2AC" },
+  { slug: "3apic",   nom: "3<sup>ème</sup> Année",     court: "3APIC",  cycle: "Collège", sous: "Collège — 3AC" },
+
+  /* ---------- TRONC COMMUN ---------- */
+  { slug: "tcs",     nom: "Tronc Commun",              court: "TCS",    cycle: "Lycée",   sous: "Sciences" },
+  { slug: "tcsf",    nom: "Tronc Commun",              court: "TCS-F",  cycle: "Lycée",   sous: "Sciences — option française" },
+
+  /* ---------- 1ère BAC ---------- */
+  { slug: "1bac-sm", nom: "1<sup>ère</sup> BAC",       court: "1BAC SM", cycle: "Lycée",  sous: "Sciences Mathématiques" },
+  { slug: "1bac-se", nom: "1<sup>ère</sup> BAC",       court: "1BAC SE", cycle: "Lycée",  sous: "Sciences Expérimentales" },
+
+  /* ---------- 2ème BAC ---------- */
+  { slug: "2bac-sma", nom: "2<sup>ème</sup> BAC",      court: "2BAC SM-A", cycle: "Lycée", sous: "Sciences Maths A" },
+  { slug: "2bac-smb", nom: "2<sup>ème</sup> BAC",      court: "2BAC SM-B", cycle: "Lycée", sous: "Sciences Maths B" },
+  { slug: "2bac-pc",  nom: "2<sup>ème</sup> BAC",      court: "2BAC PC",   cycle: "Lycée", sous: "Sciences Physiques" },
+  { slug: "2bac-svt", nom: "2<sup>ème</sup> BAC",      court: "2BAC SVT",  cycle: "Lycée", sous: "Sciences de la Vie et de la Terre" }
+];
+
+
+/* ---------------------------------------------------------------------
+   2) LES TROIS RAYONS  (ne pas modifier)
+   --------------------------------------------------------------------- */
+const RAYONS = {
+  cours: {
+    id: "cours",
+    titre: "Cours",
+    sous: "Résumés & fiches de synthèse",
+    desc: "Tout le programme condensé : définitions, propriétés, théorèmes et méthodes-clés.",
+    icone: "book",
+    accent: "violet"
+  },
+  exercices: {
+    id: "exercices",
+    titre: "Exercices",
+    sous: "Séries corrigées",
+    desc: "Des séries progressives, de l'application directe jusqu'au niveau concours.",
+    icone: "pen",
+    accent: "jaune"
+  },
+  devoirs: {
+    id: "devoirs",
+    titre: "Devoirs",
+    sous: "Contrôles & examens",
+    desc: "Devoirs surveillés, devoirs libres et sujets d'examen national avec corrections.",
+    icone: "clock",
+    accent: "rouge"
+  }
+};
+
+
+/* ---------------------------------------------------------------------
+   3) LES DOCUMENTS
+   ---------------------------------------------------------------------
+   MODÈLE À COPIER :
 
    {
-     titre    : nom du document
-     niveau   : '2bac' | '1bac' | 'tc' | 'college'
-     symbole  : ce qui s'affiche sur la vignette (eˣ, ln, ∫…)
-     type     : 'resume'     → section RÉSUMÉS DE COURS
-                'exercices'  → section EXERCICES
-                'controle'   → section CONTRÔLES & FORMULAIRES
-                'formulaire' → idem
-     resume   : une phrase de description
-     pages    : nombre de pages
-     fichier  : 'pdf/mon-fichier.pdf'  — laisse '' si pas encore prêt
-     poids    : '1,2 Mo'
-   }
+     titre:   "Limites et continuité",
+     niveau:  "2bac-sma",              // slug pris dans la liste NIVEAUX
+     type:    "cours",                 // "cours" | "exercices" | "devoirs"
+     chapitre:"Analyse",
+     pages:   12,
+     date:    "2026-09-01",
+     fichier: "docs/2bac-sma-limites.pdf"   // "" = affiché comme « Bientôt »
+   },
+   --------------------------------------------------------------------- */
+const DOCUMENTS = [
 
-   Le type décide TOUT SEUL dans quelle partie la fiche apparaît.
-   ═══════════════════════════════════════════════════════════ */
+  /* ============ 2BAC SM-A ============ */
+  { titre: "Limites & continuité",              niveau: "2bac-sma", type: "cours",     chapitre: "Analyse",   pages: 14, date: "2026-09-05", fichier: "" },
+  { titre: "Dérivation & étude de fonctions",   niveau: "2bac-sma", type: "cours",     chapitre: "Analyse",   pages: 18, date: "2026-09-20", fichier: "" },
+  { titre: "Suites numériques",                 niveau: "2bac-sma", type: "cours",     chapitre: "Analyse",   pages: 11, date: "2026-10-02", fichier: "" },
+  { titre: "Série 1 — Limites",                 niveau: "2bac-sma", type: "exercices", chapitre: "Analyse",   pages: 6,  date: "2026-09-12", fichier: "" },
+  { titre: "Série 2 — Continuité & TVI",        niveau: "2bac-sma", type: "exercices", chapitre: "Analyse",   pages: 8,  date: "2026-09-25", fichier: "" },
+  { titre: "Devoir surveillé n°1",              niveau: "2bac-sma", type: "devoirs",   chapitre: "Semestre 1",pages: 4,  date: "2026-10-15", fichier: "" },
+  { titre: "Examen national — corrigé",         niveau: "2bac-sma", type: "devoirs",   chapitre: "Révision",  pages: 10, date: "2026-06-20", fichier: "" },
 
-window.CAHIER = {
+  /* ============ 2BAC PC ============ */
+  { titre: "Limites & continuité",              niveau: "2bac-pc",  type: "cours",     chapitre: "Analyse",   pages: 10, date: "2026-09-05", fichier: "" },
+  { titre: "Nombres complexes",                 niveau: "2bac-pc",  type: "cours",     chapitre: "Algèbre",   pages: 12, date: "2026-11-04", fichier: "" },
+  { titre: "Série 1 — Dérivation",              niveau: "2bac-pc",  type: "exercices", chapitre: "Analyse",   pages: 5,  date: "2026-09-18", fichier: "" },
+  { titre: "Devoir libre n°1",                  niveau: "2bac-pc",  type: "devoirs",   chapitre: "Semestre 1",pages: 3,  date: "2026-10-10", fichier: "" },
 
-  niveaux: {
-    '2bac':    { court:'2 BAC',   long:'2ème Bac' },
-    '1bac':    { court:'1 BAC',   long:'1ère Bac' },
-    'tc':      { court:'TC',      long:'Tronc Commun' },
-    'college': { court:'COLLÈGE', long:'Collège' }
-  },
+  /* ============ 1BAC SM ============ */
+  { titre: "Barycentre dans le plan",           niveau: "1bac-sm",  type: "cours",     chapitre: "Géométrie", pages: 9,  date: "2026-09-14", fichier: "" },
+  { titre: "Série — Produit scalaire",          niveau: "1bac-sm",  type: "exercices", chapitre: "Géométrie", pages: 6,  date: "2026-10-01", fichier: "" },
+  { titre: "Devoir surveillé n°1",              niveau: "1bac-sm",  type: "devoirs",   chapitre: "Semestre 1",pages: 3,  date: "2026-10-20", fichier: "" },
 
-  types: {
-    'resume':     'Résumé de cours',
-    'exercices':  'Exercices corrigés',
-    'controle':   'Contrôle',
-    'formulaire': 'Formulaire'
-  },
+  /* ============ TRONC COMMUN ============ */
+  { titre: "Arithmétique dans ℕ",               niveau: "tcs",      type: "cours",     chapitre: "Algèbre",   pages: 8,  date: "2026-09-10", fichier: "" },
+  { titre: "Série — Ensembles de nombres",      niveau: "tcs",      type: "exercices", chapitre: "Algèbre",   pages: 4,  date: "2026-09-22", fichier: "" },
 
-  /* Les parties du site, dans l'ordre d'affichage */
-  sections: [
-    {
-      id:'resumes', titre:'Résumés de cours', types:['resume'], symbole:'§',
-      intro:"L'essentiel du chapitre en quelques pages : définitions, propriétés et méthodes. À lire avant les exercices, à relire la veille du contrôle."
-    },
-    {
-      id:'exercices', titre:'Exercices', types:['exercices'], symbole:'✎',
-      intro:"Des séries progressives, entièrement corrigées. Cherche d'abord seul, crayon en main — la correction vient après."
-    },
-    {
-      id:'controles', titre:'Contrôles & formulaires', types:['controle','formulaire'], symbole:'★',
-      intro:"Devoirs surveillés avec barème, et formulaires à garder sous les yeux pendant les révisions."
-    }
-  ],
+  /* ============ COLLÈGE ============ */
+  { titre: "Théorème de Thalès",                niveau: "3apic",    type: "cours",     chapitre: "Géométrie", pages: 6,  date: "2026-09-15", fichier: "" },
+  { titre: "Série — Équations du 1er degré",    niveau: "3apic",    type: "exercices", chapitre: "Algèbre",   pages: 4,  date: "2026-09-28", fichier: "" },
+  { titre: "Devoir surveillé n°1",              niveau: "3apic",    type: "devoirs",   chapitre: "Semestre 1",pages: 2,  date: "2026-10-18", fichier: "" }
 
-  documents: [
+];
 
-    /* ════ 2 BAC — RÉSUMÉS DE COURS ════ */
-    { titre:'Fonction exponentielle', niveau:'2bac', symbole:'eˣ', type:'resume',
-      resume:"Définition, propriétés algébriques, limites, croissances comparées et dérivation — l'essentiel en 4 pages.",
-      pages:4, fichier:'', poids:'' },
-    { titre:'Logarithme népérien', niveau:'2bac', symbole:'ln', type:'resume',
-      resume:"Domaine, propriétés, équations et inéquations, limites et dérivée, avec les conditions d'existence en rappel.",
-      pages:4, fichier:'', poids:'' },
-    { titre:'Suites numériques', niveau:'2bac', symbole:'uₙ', type:'resume',
-      resume:"Arithmétiques, géométriques, monotonie, convergence et raisonnement par récurrence.",
-      pages:4, fichier:'', poids:'' },
-    { titre:'Nombres complexes', niveau:'2bac', symbole:'ℂ', type:'resume',
-      resume:"Forme algébrique, module, argument, forme trigonométrique et interprétation géométrique.",
-      pages:4, fichier:'', poids:'' },
-    { titre:'Calcul intégral', niveau:'2bac', symbole:'∫', type:'resume',
-      resume:"Primitives usuelles, intégrale et aire, intégration par parties et calcul de volumes.",
-      pages:4, fichier:'', poids:'' },
 
-    /* ════ 2 BAC — EXERCICES ════ */
-    { titre:'Fonction exponentielle — Série corrigée', niveau:'2bac', symbole:'eˣ', type:'exercices',
-      resume:"18 exercices progressifs : équations, limites et études de fonctions. Corrigé rédigé étape par étape.",
-      pages:16, fichier:'', poids:'' },
-    { titre:'Logarithme népérien — Série corrigée', niveau:'2bac', symbole:'ln', type:'exercices',
-      resume:"Équations, inéquations et études complètes, avec les conditions d'existence traitées à chaque fois.",
-      pages:14, fichier:'', poids:'' },
-    { titre:'Suites numériques — Série corrigée', niveau:'2bac', symbole:'uₙ', type:'exercices',
-      resume:"Récurrence, majoration, suites auxiliaires géométriques et calculs de limites.",
-      pages:12, fichier:'', poids:'' },
-    { titre:'Nombres complexes — Série corrigée', niveau:'2bac', symbole:'ℂ', type:'exercices',
-      resume:"Formes trigonométriques, racines n-ièmes et applications géométriques du plan complexe.",
-      pages:12, fichier:'', poids:'' },
-    { titre:'Calcul intégral — Série corrigée', niveau:'2bac', symbole:'∫', type:'exercices',
-      resume:"Intégration par parties, changements d'écriture et calculs d'aires, tous corrigés.",
-      pages:13, fichier:'', poids:'' },
-
-    /* ════ 2 BAC — CONTRÔLES & FORMULAIRES ════ */
-    { titre:'Contrôle blanc n°1', niveau:'2bac', symbole:'DS', type:'controle',
-      resume:"Devoir surveillé de 2 heures : exponentielle, suites et complexes. Barème et corrigé inclus.",
-      pages:6, fichier:'', poids:'' },
-    { titre:'Formulaire — Primitives usuelles', niveau:'2bac', symbole:'∫', type:'formulaire',
-      resume:"Toutes les primitives à connaître et les techniques d'intégration, sur une double page.",
-      pages:2, fichier:'', poids:'' },
-
-    /* ════ 1 BAC — RÉSUMÉS DE COURS ════ */
-    { titre:'Logique mathématique', niveau:'1bac', symbole:'⇒', type:'resume',
-      resume:"Propositions, connecteurs, quantificateurs et les quatre types de raisonnement.",
-      pages:3, fichier:'', poids:'' },
-    { titre:'Trigonométrie', niveau:'1bac', symbole:'sin', type:'resume',
-      resume:"Cercle trigonométrique, valeurs remarquables, formules d'addition et de duplication.",
-      pages:4, fichier:'', poids:'' },
-
-    /* ════ 1 BAC — EXERCICES ════ */
-    { titre:'Logique — Série corrigée', niveau:'1bac', symbole:'⇒', type:'exercices',
-      resume:"Négations, contraposées, récurrence et raisonnement par l'absurde, avec corrections détaillées.",
-      pages:9, fichier:'', poids:'' },
-    { titre:'Trigonométrie — Série corrigée', niveau:'1bac', symbole:'sin', type:'exercices',
-      resume:"Équations et inéquations trigonométriques, transformations d'expressions, tout corrigé.",
-      pages:11, fichier:'', poids:'' },
-
-    /* ════ 1 BAC — FORMULAIRE ════ */
-    { titre:'Formulaire — Trigonométrie', niveau:'1bac', symbole:'θ', type:'formulaire',
-      resume:"Toutes les formules à connaître, organisées pour la révision de dernière minute.",
-      pages:2, fichier:'', poids:'' },
-
-    /* ════ TRONC COMMUN ════ */
-    { titre:'Fonctions numériques', niveau:'tc', symbole:'f(x)', type:'resume',
-      resume:"Domaine de définition, image et antécédent, variations et lecture graphique.",
-      pages:3, fichier:'', poids:'' },
-    { titre:'Fonctions numériques — Série corrigée', niveau:'tc', symbole:'f(x)', type:'exercices',
-      resume:"Déterminer un domaine, étudier des variations et lire un graphique, pas à pas.",
-      pages:10, fichier:'', poids:'' },
-
-    /* ════ COLLÈGE ════ */
-    { titre:'Calcul littéral', niveau:'college', symbole:'x²', type:'resume',
-      resume:"Développer, factoriser, identités remarquables et résolution d'équations.",
-      pages:3, fichier:'', poids:'' },
-    { titre:'Calcul littéral — Série corrigée', niveau:'college', symbole:'x²', type:'exercices',
-      resume:"Du développement simple à la factorisation par identité remarquable, corrigé complet.",
-      pages:8, fichier:'', poids:'' },
-    { titre:'Géométrie repérée', niveau:'college', symbole:'↗', type:'resume',
-      resume:"Coordonnées, milieu, distance et vecteurs dans le plan repéré.",
-      pages:3, fichier:'', poids:'' },
-    { titre:'Géométrie repérée — Série corrigée', niveau:'college', symbole:'↗', type:'exercices',
-      resume:"Calculs de longueurs, natures de triangles et applications guidées dans le plan.",
-      pages:7, fichier:'', poids:'' }
-  ]
+/* ---------------------------------------------------------------------
+   4) INFOS DU SITE
+   --------------------------------------------------------------------- */
+const SITE = {
+  nom:       "L'Hack Des Maths",
+  prof:      "Prof. Abdellah Tahar",
+  centre:    "Centre Pascal — Fès",
+  email:     "contact@lhackdesmaths.com",
+  whatsapp:  "212600000000",
+  youtube:   "#",
+  instagram: "#"
 };

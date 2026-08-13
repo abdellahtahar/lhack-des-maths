@@ -3,172 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#141B34">
-<title>Résumés de cours & exercices — L'Hack Des Maths</title>
-<meta name="description" content="Résumés de cours et exercices corrigés de mathématiques en PDF, classés par niveau, du collège au baccalauréat. Téléchargement libre.">
-<link rel="canonical" href="https://lhackdesmaths.com/bibliotheque.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bibliothèque — Tous les PDF — L'Hack Des Maths">
-<meta property="og:description" content="Cours, exercices corrigés et contrôles en PDF. Téléchargement libre.">
-<meta property="og:image" content="https://lhackdesmaths.com/assets/prof-carre.jpg">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="site.webmanifest">
+<title>Bibliothèque — L'Hack Des Maths</title>
+<meta name="description" content="Tous les cours, exercices et devoirs de mathématiques en PDF, à télécharger gratuitement.">
+<meta name="theme-color" content="#0C0912">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236722A0'/><text x='50' y='72' font-size='64' font-family='Georgia' text-anchor='middle' fill='%23FFD900'>∑</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<a class="saut" href="#contenu">Aller aux documents</a>
-<div class="jauge" id="jauge"></div>
+<div id="slot-nav"></div>
 
-<header class="entete colle">
-  <div class="zone entete-in">
-    <a class="logo" href="index.html">
-      <span class="logo-signe" aria-hidden="true">∑</span>
-      <span class="logo-txt">L'Hack Des Maths<small>Abdellah Tahar</small></span>
-    </a>
-
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="index.html">Accueil</a>
-      <a class="ici" href="bibliotheque.html" aria-current="page">Documents</a>
-      <a href="index.html#methode">Méthode</a>
-      <a href="index.html#moi">Qui suis-je</a>
+<section class="entete-page">
+  <div class="wrap">
+    <nav class="fil" id="fil">
+      <a href="index.html">Accueil</a><i>/</i>
+      <a href="index.html#niveaux">Niveaux</a>
     </nav>
-
-    <div class="outils">
-      <a class="btn btn-contour entete-cta" href="index.html#moi">Qui suis-je</a>
-      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <span class="badge-niv" id="badge">Bibliothèque</span>
+    <h1 id="titre">Tous les documents</h1>
+    <p id="sous">—</p>
   </div>
+</section>
 
-  <div class="menu" id="menu">
-    <a href="index.html">Accueil</a>
-    <a href="bibliotheque.html">Documents</a>
-    <a href="index.html#methode">Méthode</a>
-    <a href="index.html#moi">Qui suis-je</a>
+<section class="section" style="padding-top:34px">
+  <div class="wrap">
+
+    <div class="barre-outils rev">
+      <div class="recherche">
+        <span id="ico-loupe"></span>
+        <input type="search" id="q" placeholder="Chercher un chapitre, un titre…" autocomplete="off">
+      </div>
+      <div class="puces" id="puces">
+        <button class="puce on" data-t="">Tout</button>
+        <button class="puce" data-t="cours">Cours</button>
+        <button class="puce" data-t="exercices">Exercices</button>
+        <button class="puce" data-t="devoirs">Devoirs</button>
+      </div>
+    </div>
+
+    <div class="liste-docs" id="liste"></div>
+
+    <div style="margin-top:40px; display:flex; gap:12px; flex-wrap:wrap">
+      <a href="#" class="btn btn-3" id="retour">← Retour aux rayons</a>
+      <a href="index.html#niveaux" class="btn btn-ghost">Changer de niveau</a>
+    </div>
+
   </div>
-</header>
+</section>
 
-<main id="contenu">
-
-  <section class="heros" style="padding-bottom:2rem">
-    <div class="heros-fond" aria-hidden="true"></div>
-    <div class="zone" style="position:relative">
-      <span class="tag">Bibliothèque</span>
-      <h1 style="margin:1rem 0 .75rem;font-size:clamp(2.25rem,1.4rem + 3.6vw,3.75rem)">
-        Tout le cahier,<br><em style="font-style:normal;color:var(--cobalt)">page par page.</em>
-      </h1>
-      <p class="gris mesure">
-        Pour chaque niveau, deux parties bien séparées : les <strong>résumés de cours</strong>
-        d'un côté, les <strong>exercices corrigés</strong> de l'autre. Téléchargement libre,
-        sans compte ni inscription.
-      </p>
-      <span class="note-main" style="margin-top:1.25rem">tout est gratuit ✓</span>
-    </div>
-  </section>
-
-  <section class="sect" style="padding-top:1.5rem">
-    <div class="zone">
-
-      <div class="barre-outils">
-        <div class="onglets" role="tablist" aria-label="Filtrer par niveau">
-          <button type="button" role="tab" data-niveau="tous" aria-selected="true">Tous</button>
-          <button type="button" role="tab" data-niveau="2bac" aria-selected="false">2 Bac</button>
-          <button type="button" role="tab" data-niveau="1bac" aria-selected="false">1 Bac</button>
-          <button type="button" role="tab" data-niveau="tc" aria-selected="false">Tronc Commun</button>
-          <button type="button" role="tab" data-niveau="college" aria-selected="false">Collège</button>
-        </div>
-
-        <div class="chercher">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
-          <label class="sr" for="chercher">Rechercher un document</label>
-          <input id="chercher" type="search" placeholder="Exponentielle, suites, trigonométrie…" autocomplete="off">
-          <button class="vider" id="vider" type="button" aria-label="Effacer la recherche">×</button>
-        </div>
-      </div>
-
-      <div class="onglets onglets-partie" role="tablist" aria-label="Choisir une partie">
-        <button type="button" role="tab" data-partie="toutes"   aria-selected="true">Tout</button>
-        <button type="button" role="tab" data-partie="resumes"  aria-selected="false">§ Résumés de cours</button>
-        <button type="button" role="tab" data-partie="exercices" aria-selected="false">✎ Exercices</button>
-        <button type="button" role="tab" data-partie="controles" aria-selected="false">★ Contrôles</button>
-      </div>
-
-      <p class="compte-res" id="nb" aria-live="polite" style="margin:1.25rem 0">23 documents</p>
-
-      <nav class="raccourcis" id="raccourcis" aria-label="Aller à une partie"></nav>
-
-      <div class="parties" id="parties"></div>
-
-      <div class="rien" id="rien" hidden>
-        <span class="signe" aria-hidden="true">∅</span>
-        <h3>Aucun document trouvé</h3>
-        <p>Essaie un autre mot-clé, ou reviens à la liste complète.</p>
-        <button class="btn btn-encre" id="toutVoir" type="button" style="margin-top:1rem">Voir tous les documents</button>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="sect" style="padding-top:0">
-    <div class="zone">
-      <div class="carte-fin rev">
-        <div>
-          <span class="tag">Un document manque ?</span>
-          <h2 style="margin-top:.6rem">Dis-moi ce qu'il te faut.</h2>
-        </div>
-        <a class="btn btn-encre btn-lg" href="mailto:contact@lhackdesmaths.com">Écris-moi <span class="fl" aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="pied">
-  <div class="zone">
-    <div class="pied-grille">
-      <div>
-        <a class="logo" href="index.html">
-          <span class="logo-signe" aria-hidden="true">∑</span>
-          <span class="logo-txt">L'Hack Des Maths<small>Abdellah Tahar</small></span>
-        </a>
-        <p>Le cahier de maths ouvert à tous — du collège au baccalauréat.</p>
-      </div>
-      <div>
-        <span class="etiq" style="color:rgba(255,255,255,.4);margin-bottom:14px">Le site</span>
-        <nav class="pied-liens" style="flex-direction:column;gap:10px">
-          <a href="bibliotheque.html">Bibliothèque</a>
-          <a href="index.html#niveaux">Niveaux</a>
-          <a href="index.html#methode">Méthode</a>
-          <a href="index.html#moi">Qui suis-je</a>
-        </nav>
-      </div>
-      <div>
-        <span class="etiq" style="color:rgba(255,255,255,.4);margin-bottom:14px">Contact</span>
-        <nav class="pied-liens" style="flex-direction:column;gap:10px">
-          <a href="mailto:contact@lhackdesmaths.com">Email</a>
-          <a href="https://wa.me/212600000000" target="_blank" rel="noopener">WhatsApp</a>
-        </nav>
-      </div>
-    </div>
-    <div class="pied-bas">
-      <span>© <span id="an">2026</span> L'Hack Des Maths — Fès, Maroc</span>
-      <span>Comprendre. S'entraîner. Réussir.</span>
-    </div>
-  </div>
-</footer>
-
-<nav class="nav-basse" aria-label="Navigation mobile">
-  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/></svg>Accueil</a>
-  <a class="ici" href="bibliotheque.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v16H4zM14 4h6v16h-6z"/></svg>Documents</a>
-  <a href="index.html#niveaux"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Niveaux</a>
-  <a href="index.html#moi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Moi</a>
-</nav>
+<div id="slot-pied"></div>
 
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script>
+let ETAT = { slug:null, type:'', q:'' };
+
+function dessineListe(){
+  const box = document.getElementById('liste');
+  let liste = DOCUMENTS.filter(d =>
+    (!ETAT.slug || d.niveau === ETAT.slug) &&
+    (!ETAT.type || d.type === ETAT.type)
+  );
+
+  if (ETAT.q){
+    const q = ETAT.q.toLowerCase();
+    liste = liste.filter(d =>
+      (d.titre + ' ' + (d.chapitre||'') + ' ' + (niveauParSlug(d.niveau)?.court||'')).toLowerCase().includes(q)
+    );
+  }
+
+  liste.sort((a,b) => (b.date||'').localeCompare(a.date||''));
+
+  box.innerHTML = liste.length
+    ? liste.map(carteDoc).join('')
+    : `<div class="vide">
+         <div class="em">✎</div>
+         <h3>Aucun document ici pour l'instant</h3>
+         <p>Ce rayon se remplit régulièrement. Reviens bientôt, ou essaie un autre filtre.</p>
+       </div>`;
+
+  box.querySelectorAll('.rev').forEach((el,i) => setTimeout(() => el.classList.add('vu'), 40 + i*45));
+}
+
+function avantInteractions(){
+  ETAT.slug = params.get('n');
+  ETAT.type = params.get('t') || '';
+
+  const niv = niveauParSlug(ETAT.slug);
+
+  document.getElementById('ico-loupe').innerHTML = ICO.loupe;
+
+  if (niv){
+    document.title = niv.court + ' — Bibliothèque';
+    document.getElementById('badge').textContent = niv.court;
+    document.getElementById('fil').insertAdjacentHTML('beforeend',
+      `<i>/</i><a href="niveau.html?n=${niv.slug}">${niv.court}</a><i>/</i><b>${ETAT.type ? RAYONS[ETAT.type].titre : 'Tout'}</b>`);
+    document.getElementById('titre').innerHTML =
+      (ETAT.type ? RAYONS[ETAT.type].titre : 'Tous les documents') + ' <span class="violet-txt">· ' + niv.court + '</span>';
+    document.getElementById('sous').textContent = ETAT.type ? RAYONS[ETAT.type].desc : niv.sous;
+    document.getElementById('retour').href = 'niveau.html?n=' + niv.slug;
+  } else {
+    document.getElementById('sous').textContent = 'La totalité des documents du site, tous niveaux confondus.';
+    document.getElementById('retour').href = 'index.html#niveaux';
+    document.getElementById('retour').textContent = '← Retour aux niveaux';
+  }
+
+  /* Filtres */
+  document.querySelectorAll('.puce').forEach(p => {
+    p.classList.toggle('on', (p.dataset.t || '') === ETAT.type);
+    p.addEventListener('click', () => {
+      ETAT.type = p.dataset.t || '';
+      document.querySelectorAll('.puce').forEach(x => x.classList.remove('on'));
+      p.classList.add('on');
+      const u = new URL(location);
+      ETAT.type ? u.searchParams.set('t', ETAT.type) : u.searchParams.delete('t');
+      history.replaceState({}, '', u);
+      if (niv){
+        document.getElementById('titre').innerHTML =
+          (ETAT.type ? RAYONS[ETAT.type].titre : 'Tous les documents') + ' <span class="violet-txt">· ' + niv.court + '</span>';
+        document.getElementById('sous').textContent = ETAT.type ? RAYONS[ETAT.type].desc : niv.sous;
+      }
+      dessineListe();
+    });
+  });
+
+  let t;
+  document.getElementById('q').addEventListener('input', e => {
+    clearTimeout(t);
+    t = setTimeout(() => { ETAT.q = e.target.value.trim(); dessineListe(); }, 160);
+  });
+
+  dessineListe();
+}
+</script>
 </body>
 </html>
