@@ -2,26 +2,24 @@ DOSSIER PDF
 ===========
 
 1. Depose ton fichier ici, par exemple :
-   pdf/2bac-pc-limites-cours.pdf
+   pdf/2bac-limites-cours.pdf
 
 2. Ouvre js/data.js, trouve la ligne du document et remplis "fichier" :
 
-   { titre:"Limites et continuite", niveau:"2bac-pc", type:"cours",
-     chapitre:"Analyse - S1", pages:12, date:"2026-09-08",
-     fichier:"pdf/2bac-pc-limites-cours.pdf" },
+   { titre:"Limites et continuite", niveau:"2bac-pc-svt", type:"cours",
+     chapitre:"Analyse", pages:12, date:"2026-09-08",
+     fichier:"pdf/2bac-limites-cours.pdf" },
 
-3. Le bouton "PDF" s'active tout seul.
+3. Le bouton PDF s'active tout seul.
    Tant que "fichier" est vide, la fiche s'affiche en "Bientot".
 
-LE CHAMP "type" DECIDE DU RAYON :
-   type:"cours"      -> rayon COURS
-   type:"exercices"  -> rayon EXERCICES
-   type:"devoirs"    -> rayon DEVOIRS
+TYPE -> RAYON :
+   "cours"      -> COURS
+   "exercices"  -> EXERCICES
+   "devoirs"    -> DEVOIRS
 
-LE CHAMP "niveau" (slug pris dans NIVEAUX) :
-   2bac-pc  2bac-svt  2bac-sma  2bac-smb
-   1bac-se  1bac-sm   tcs
-   3apic    2apic     1apic
+NIVEAU (slug) :
+   2bac-pc-svt   2bac-sm   1bac-se   1bac-sm   tcs
+   3apic   2apic   1apic
 
-Nomme tes fichiers en minuscules, sans accents ni espaces :
-   niveau-chapitre-type.pdf
+Nomme tes fichiers en minuscules, sans accents ni espaces.

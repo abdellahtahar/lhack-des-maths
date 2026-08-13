@@ -1,11 +1,10 @@
 # L'Hack Des Maths — abdellahtahar.com
 
 Site statique (HTML / CSS / JS, sans framework, sans build).
-Specialite : **2eme BAC Sciences Physiques & SVT**.
 
 ## Structure
 ```
-index.html          -> accueil
+index.html          -> accueil (cycle -> niveau)
 niveau.html         -> ecran de choix Cours / Exercices / Devoirs
 bibliotheque.html   -> liste des documents + telechargement
 css/style.css       -> tout le design
@@ -20,21 +19,29 @@ pdf/                -> les documents PDF
 2. Dans `js/data.js`, remplis le champ `fichier` de la ligne correspondante :
 
 ```js
-{ titre:"Limites et continuite", niveau:"2bac-pc", type:"cours",
-  chapitre:"Analyse - S1", pages:12, date:"2026-09-08",
-  fichier:"pdf/2bac-pc-limites-cours.pdf" },
+{ titre:"Limites et continuite", niveau:"2bac-pc-svt", type:"cours",
+  chapitre:"Analyse", pages:12, date:"2026-09-08",
+  fichier:"pdf/2bac-limites-cours.pdf" },
 ```
 
 Tant que `fichier:""`, le document s'affiche en « Bientot ».
 
-## Mettre un niveau en avant sur l'accueil
-Ajoute `vedette:true` dans sa ligne de `NIVEAUX`.
+## Les niveaux (slugs)
+```
+2bac-pc-svt   2bac-sm   1bac-se   1bac-sm   tcs
+3apic   2apic   1apic
+```
+Le champ `cycle` ("College" ou "Lycee") decide dans quel groupe le niveau apparait.
+
+## Le champ date
+Il ne s'affiche pas sur le site : il sert uniquement a ranger les documents
+dans l'ordre du programme (septembre -> examen national).
 
 ## Contacts
 Objet `SITE` en bas de `js/data.js`.
 
 ## Important : le cache
-Les fichiers CSS et JS sont appeles avec `?v=5`.
+Les fichiers CSS et JS sont appeles avec `?v=6`.
 **A chaque fois que tu modifies `css/style.css` ou `js/*.js`, incremente ce numero**
-(`?v=6`, `?v=7`, ...) dans les 3 fichiers HTML — sinon les visiteurs continuent
+(`?v=7`, `?v=8`, ...) dans les 3 fichiers HTML — sinon les visiteurs continuent
 de voir l'ancienne version gardee en cache par leur navigateur.

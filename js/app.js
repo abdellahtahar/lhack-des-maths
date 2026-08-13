@@ -17,7 +17,11 @@ const ICO = {
   mail:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M3 7l9 6 9-6"/></svg>',
   tel:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3h-2A1.6 1.6 0 003 4.7C3 13.1 10.9 21 19.3 21a1.6 1.6 0 001.7-1.6v-2a1.3 1.3 0 00-1-1.3l-3-.7a1.3 1.3 0 00-1.3.4l-1.1 1.3a13.6 13.6 0 01-5.7-5.7l1.3-1.1a1.3 1.3 0 00.4-1.3l-.7-3A1.3 1.3 0 006.6 3z"/></svg>',
   insta:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>',
-  yt:      '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.33a2.78 2.78 0 00-1.95-1.96C18.86 4.25 12 4.25 12 4.25s-6.86 0-8.59.46A2.78 2.78 0 001.46 6.67C1 8.4 1 12 1 12s0 3.6.46 5.33a2.78 2.78 0 001.95 1.96c1.73.46 8.59.46 8.59.46s6.86 0 8.59-.46a2.78 2.78 0 001.95-1.96C23 15.6 23 12 23 12zM9.75 15.27V8.73L15.5 12z"/></svg>'
+  yt:      '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.33a2.78 2.78 0 00-1.95-1.96C18.86 4.25 12 4.25 12 4.25s-6.86 0-8.59.46A2.78 2.78 0 001.46 6.67C1 8.4 1 12 1 12s0 3.6.46 5.33a2.78 2.78 0 001.95 1.96c1.73.46 8.59.46 8.59.46s6.86 0 8.59-.46a2.78 2.78 0 001.95-1.96C23 15.6 23 12 23 12zM9.75 15.27V8.73L15.5 12z"/></svg>',
+  chapeau: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.4L12 4l10 4.4-10 4.4z"/><path d="M6 10.6v4.6c0 1.7 2.7 3.1 6 3.1s6-1.4 6-3.1v-4.6"/><path d="M22 8.4v5.2"/></svg>',
+  sac:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="13" rx="3.5"/><path d="M8.5 7.5V5.8A2.3 2.3 0 0110.8 3.5h2.4a2.3 2.3 0 012.3 2.3v1.7"/><path d="M3 13h18"/></svg>',
+  echecs:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21h6"/><path d="M10 21c0-3 .8-4.6 1.5-5.8"/><path d="M14 21c0-3-.8-4.6-1.5-5.8"/><path d="M8 15.2h8"/><path d="M12 3.2a2.4 2.4 0 012.4 2.4c0 1.3-1 1.8-1 2.9h1.9L14 15.2h-4L8.7 8.5h1.9c0-1.1-1-1.6-1-2.9A2.4 2.4 0 0112 3.2z"/></svg>',
+  livre:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.5 5 8.5 4.3 4 4.3V19c4.5 0 6.5.7 8 2.2 1.5-1.5 3.5-2.2 8-2.2V4.3c-4.5 0-6.5.7-8 2.2z"/><path d="M12 6.5v14.7"/></svg>'
 };
 
 /* ---------- Petits helpers ---------- */
@@ -37,13 +41,12 @@ function monterChrome(){
     <div class="wrap nav-in">
       <a href="index.html" class="logo">
         <span class="logo-mark">∑</span>
-        <span>L'Hack Des <b>Maths</b><small>Prof. Abdellah Tahar</small></span>
+        <span>L'Hack Des <b>Maths</b><small>Abdellah Tahar · Enseignant</small></span>
       </a>
       <nav class="nav-liens">
         <a href="index.html#niveaux">Niveaux</a>
-        <a href="index.html#rayons">Documents</a>
         <a href="index.html#moi">Qui suis-je</a>
-        <a href="index.html#methode">Méthode</a>
+        <a href="index.html#parcours">Parcours</a>
         <a href="index.html#contact" class="btn btn-1" style="padding:11px 22px;font-size:14px">Me contacter</a>
       </nav>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -53,8 +56,8 @@ function monterChrome(){
   <aside class="menu-mob" id="menuMob">
     <a href="index.html">Accueil</a>
     <a href="index.html#niveaux">Niveaux</a>
-    <a href="index.html#rayons">Documents</a>
     <a href="index.html#moi">Qui suis-je</a>
+    <a href="index.html#parcours">Parcours</a>
     <a href="index.html#methode">Méthode</a>
     <a href="index.html#contact">Contact</a>
     <a href="https://wa.me/${SITE.whatsapp}" target="_blank" rel="noopener" style="color:#FFD900">WhatsApp ${SITE.tel}</a>
@@ -68,15 +71,15 @@ function monterChrome(){
         <div>
           <a href="index.html" class="logo">
             <span class="logo-mark">∑</span>
-            <span>L'Hack Des <b>Maths</b><small>Prof. Abdellah Tahar</small></span>
+            <span>L'Hack Des <b>Maths</b><small>Abdellah Tahar · Enseignant</small></span>
           </a>
           <p>Des documents de mathématiques clairs, structurés et gratuits, du collège jusqu'au baccalauréat.</p>
         </div>
         <div>
           <h5>Niveaux</h5>
           <ul>
-            <li><a href="niveau.html?n=2bac-pc">2BAC Sciences Physiques</a></li>
-            <li><a href="niveau.html?n=2bac-svt">2BAC SVT</a></li>
+            <li><a href="niveau.html?n=2bac-pc-svt">2BAC PC &amp; SVT</a></li>
+            <li><a href="niveau.html?n=2bac-sm">2BAC Sciences Maths</a></li>
             <li><a href="index.html#niveaux">Tous les niveaux</a></li>
             <li><a href="index.html#moi">Qui suis-je</a></li>
           </ul>
@@ -172,50 +175,60 @@ function interactions(){
 /* =====================================================================
    RENDU : GRILLE DES NIVEAUX
    ===================================================================== */
-function rendreNiveaux(cible){
+function rendreNiveaux(cible, cycle){
   const box = $(cible); if (!box) return;
-  const cycles = [...new Set(NIVEAUX.map(n => n.cycle))];
-  box.innerHTML = cycles.map(cy => `
-    <div class="cycle-titre rev"><h3>${cy}</h3><div class="trait"></div></div>
+  const liste = NIVEAUX.filter(n => !cycle || n.cycle === cycle);
+
+  box.innerHTML = `
     <div class="grille-niv">
-      ${NIVEAUX.filter(n => n.cycle === cy).map((n,i) => `
-        <a class="carte-niv rev rev-d${(i%4)+1}" href="niveau.html?n=${n.slug}" data-rideau="${n.court}">
+      ${liste.map((n,i) => `
+        <a class="carte-niv" href="niveau.html?n=${n.slug}" data-rideau="${n.court}"
+           style="animation-delay:${i*55}ms">
           <span class="niv-tag">${n.court}</span>
           <h4>${n.nom}</h4>
           <p class="niv-sous">${n.sous}</p>
           <div class="niv-bas">
-            <span class="niv-nb">${nbDocs(n.slug)} document${nbDocs(n.slug) > 1 ? 's' : ''}</span>
+            <span class="niv-nb">${nbDocs(n.slug)} doc${nbDocs(n.slug) > 1 ? 's' : ''}</span>
             <span class="niv-fleche">${ICO.fleche}</span>
           </div>
         </a>`).join('')}
-    </div>`).join('');
+    </div>`;
 }
 
 /* =====================================================================
-   RENDU : NIVEAUX MIS EN AVANT (vedette:true)
+   RENDU : LE CHOIX DU CYCLE (Collège / Lycée)
    ===================================================================== */
-function rendreVedettes(cible){
+function rendreCycles(cible, cibleNiveaux){
   const box = $(cible); if (!box) return;
-  const v = NIVEAUX.filter(n => n.vedette);
-  if (!v.length){ box.innerHTML = ''; return; }
 
-  box.innerHTML = v.map((n,i) => {
-    const c = docsDe(n.slug,'cours').length,
-          e = docsDe(n.slug,'exercices').length,
-          d = docsDe(n.slug,'devoirs').length;
-    return `
-    <a class="carte-focus rev rev-d${i+1}" href="niveau.html?n=${n.slug}" data-rideau="${n.court}">
-      <span class="focus-etoile">★ Spécialité du prof</span>
-      <span class="focus-tag">${n.court}</span>
-      <h3>${n.nom}<em>${n.sous}</em></h3>
-      <div class="focus-chiffres">
-        <span><b>${c}</b>Cours</span>
-        <span><b>${e}</b>Exercices</span>
-        <span><b>${d}</b>Devoirs</span>
-      </div>
-      <span class="focus-cta">Ouvrir le programme complet ${ICO.fleche}</span>
-    </a>`;
-  }).join('');
+  const nbDuCycle = c => NIVEAUX.filter(n => n.cycle === c)
+                                .reduce((t,n) => t + nbDocs(n.slug), 0);
+
+  box.innerHTML = CYCLES.map((c,i) => `
+    <button class="carte-cycle rev rev-d${i+1}" data-cycle="${c.id}">
+      <span class="cyc-ico">${c.id === 'Lycée' ? ICO.chapeau : ICO.sac}</span>
+      <h3>${c.titre}</h3>
+      <p class="cyc-sous">${c.sous}</p>
+      <p class="cyc-note">${c.note}</p>
+      <span class="cyc-nb">${nbDuCycle(c.id)} documents</span>
+    </button>`).join('');
+
+  const choisir = (cy) => {
+    $$('.carte-cycle', box).forEach(b => b.classList.toggle('on', b.dataset.cycle === cy));
+    rendreNiveaux(cibleNiveaux, cy);
+    const t = $('#titre-niveaux');
+    if (t) t.textContent = cy;
+  };
+
+  $$('.carte-cycle', box).forEach(b => {
+    b.addEventListener('click', () => {
+      choisir(b.dataset.cycle);
+      const g = $(cibleNiveaux);
+      if (g) g.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+
+  choisir('Lycée');   // choix par défaut
 }
 
 /* =====================================================================
@@ -241,25 +254,27 @@ function rendreRayons(cible, slug){
 /* =====================================================================
    RENDU : LISTE DES DOCUMENTS
    ===================================================================== */
-function carteDoc(d){
+function carteDoc(d, avecNiveau){
   const niv = niveauParSlug(d.niveau);
   const etiquette = { cours:'COURS', exercices:'EXOS', devoirs:'DEVOIR' }[d.type];
   const dispo = d.fichier && d.fichier.trim() !== '';
-  const date = d.date ? new Date(d.date).toLocaleDateString('fr-FR', { month:'short', year:'numeric' }) : '';
+
+  /* Deux informations maximum : lisible d'un coup d'œil sur mobile */
+  const info1 = avecNiveau ? (niv ? niv.court : d.niveau) : (d.chapitre || '');
+  const info2 = d.pages ? d.pages + ' p.' : '';
+
   return `
-  <article class="doc rev" data-type="${d.type}">
+  <article class="doc" data-type="${d.type}">
     <span class="doc-ico">${etiquette}</span>
     <div class="doc-info">
       <h4>${d.titre}</h4>
       <div class="doc-meta">
-        <span>${niv ? niv.court : d.niveau}</span>
-        ${d.chapitre ? `<span>${d.chapitre}</span>` : ''}
-        ${d.pages ? `<span>${d.pages} p.</span>` : ''}
-        ${date ? `<span>${date}</span>` : ''}
+        ${info1 ? `<span>${info1}</span>` : ''}
+        ${info2 ? `<span>${info2}</span>` : ''}
       </div>
     </div>
     ${dispo
-      ? `<a class="doc-dl" href="${d.fichier}" download target="_blank" rel="noopener">${ICO.telech} PDF</a>`
+      ? `<a class="doc-dl" href="${d.fichier}" download target="_blank" rel="noopener">${ICO.telech}<i>PDF</i></a>`
       : `<span class="doc-dl bientot">Bientôt</span>`}
   </article>`;
 }

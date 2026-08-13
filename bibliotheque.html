@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -57,8 +57,8 @@
 
 <div id="slot-pied"></div>
 
-<script src="js/data.js?v=5"></script>
-<script src="js/app.js?v=5"></script>
+<script src="js/data.js?v=6"></script>
+<script src="js/app.js?v=6"></script>
 <script>
 let ETAT = { slug:null, type:'', q:'' };
 
@@ -79,15 +79,21 @@ function dessineListe(){
   /* ordre du programme : du 1er chapitre de septembre jusqu'à l'examen national */
   liste.sort((a,b) => (a.date||'').localeCompare(b.date||''));
 
+  /* sur une page de niveau : on affiche le chapitre.
+     sur la bibliothèque globale : on affiche le niveau. */
+  const avecNiveau = !ETAT.slug;
+
   box.innerHTML = liste.length
-    ? liste.map(carteDoc).join('')
+    ? liste.map(d => carteDoc(d, avecNiveau)).join('')
     : `<div class="vide">
          <div class="em">✎</div>
          <h3>Aucun document ici pour l'instant</h3>
          <p>Ce rayon se remplit régulièrement. Reviens bientôt, ou essaie un autre filtre.</p>
        </div>`;
 
-  box.querySelectorAll('.rev').forEach((el,i) => setTimeout(() => el.classList.add('vu'), 40 + i*45));
+  box.querySelectorAll('.doc').forEach((el,i) => {
+    el.style.animationDelay = (i * 40) + 'ms';
+  });
 }
 
 function avantInteractions(){
