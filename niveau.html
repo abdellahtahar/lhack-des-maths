@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -19,11 +19,7 @@
 
 <section class="entete-page">
   <div class="wrap">
-    <nav class="fil">
-      <a href="index.html">Accueil</a><i>/</i>
-      <a href="index.html#niveaux">Niveaux</a><i>/</i>
-      <b id="fil-niv">—</b>
-    </nav>
+    <nav class="fil-ariane" id="ariane"></nav>
     <span class="badge-niv" id="badge">—</span>
     <h1 id="titre">—</h1>
     <p id="sous">—</p>
@@ -33,22 +29,22 @@
 <section class="section" style="padding-top:38px">
   <div class="wrap">
     <div class="rev" style="margin-bottom:28px">
-      <span class="kicker">Étape 2</span>
+      <span class="kicker">Étape 4</span>
       <h2 class="h-sec" style="font-size:clamp(24px,3.6vw,36px)">Qu'est-ce que tu cherches ?</h2>
     </div>
     <div class="grille-rayons" id="grille-rayons"></div>
 
     <div class="rev" style="margin-top:44px; display:flex; gap:12px; flex-wrap:wrap; align-items:center">
       <a href="bibliotheque.html" class="btn btn-3" id="btn-tout">Voir tous les documents de ce niveau</a>
-      <a href="index.html#niveaux" class="btn btn-ghost">← Changer de niveau</a>
+      <a href="#" class="btn btn-ghost" id="btn-retour">← Changer de filière</a>
     </div>
   </div>
 </section>
 
 <div id="slot-pied"></div>
 
-<script src="js/data.js?v=6"></script>
-<script src="js/app.js?v=6"></script>
+<script src="js/data.js?v=7"></script>
+<script src="js/app.js?v=7"></script>
 <script>
 function avantInteractions(){
   const slug = params.get('n');
@@ -56,15 +52,33 @@ function avantInteractions(){
 
   if (!niv){
     document.getElementById('titre').textContent = 'Niveau introuvable';
-    document.getElementById('sous').textContent  = 'Reviens à l\'accueil pour choisir un niveau.';
+    document.getElementById('sous').textContent  = 'Reviens à l\'accueil pour choisir ton niveau.';
+    document.getElementById('ariane').innerHTML  = '<a href="index.html">Accueil</a>';
     document.getElementById('badge').style.display = 'none';
     return;
   }
 
   document.title = niv.court + ' — L\'Hack Des Maths';
-  document.getElementById('fil-niv').textContent = niv.court;
+
+  /* Fil d'Ariane complet : Accueil / Cycle / Année / Filière */
+  const groupe = anneesDe(niv.cycle).find(a => a.id === niv.annee);
+  const nomAnnee = groupe ? groupe.nom.replace(/<[^>]+>/g,'') : '';
+  const lienCycle = 'niveaux.html?c=' + encodeURIComponent(niv.cycle);
+  const lienRetour = (groupe && groupe.niveaux.length > 1)
+    ? lienCycle + '&a=' + niv.annee
+    : lienCycle;
+
+  document.getElementById('ariane').innerHTML =
+    `<a href="index.html">Accueil</a><i>/</i>` +
+    `<a href="${lienCycle}">${niv.cycle}</a><i>/</i>` +
+    (nomAnnee ? `<a href="${lienRetour}">${nomAnnee}</a><i>/</i>` : '') +
+    `<b>${niv.court}</b>`;
+
+  const br = document.getElementById('btn-retour');
+  br.href = lienRetour;
+  br.textContent = (groupe && groupe.niveaux.length > 1) ? '← Changer de filière' : '← Changer d\'année';
   document.getElementById('badge').textContent   = niv.court;
-  document.getElementById('titre').innerHTML     = niv.nom + ' <span class="violet-txt">' + niv.sous + '</span>';
+  document.getElementById('titre').innerHTML     = (niv.anneeNom || niv.court) + ' <span class="violet-txt">' + (niv.filiere || niv.sous) + '</span>';
   const n = nbDocs(slug);
   document.getElementById('sous').textContent =
     n ? n + ' document' + (n>1?'s':'') + ' disponibles dans ce niveau.'

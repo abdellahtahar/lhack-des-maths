@@ -9,35 +9,48 @@
 /* ---------------------------------------------------------------------
    1) LES NIVEAUX
    ---------------------------------------------------------------------
-   cycle : "Collège" ou "Lycée"   (c'est le premier choix sur l'accueil)
+   Le parcours de l'élève :
+      Accueil → Cycle (Collège / Lycée) → Année → Filière → Cours/Exos/Devoirs
+
+   cycle    : "Collège" ou "Lycée"
+   annee    : identifiant de l'année  (ex. "2bac")
+   anneeNom : ce qui s'affiche sur la carte de l'année  (ex. 2ème BAC)
+   filiere  : ce qui s'affiche sur la carte de la filière (ex. PC & SVT)
+
+   Si une année n'a qu'une seule filière, on saute l'écran des filières.
    --------------------------------------------------------------------- */
 const NIVEAUX = [
 
   /* ================= LYCÉE ================= */
-  { slug:"2bac-pc-svt", nom:"2<sup>ème</sup> BAC", court:"2BAC PC & SVT", cycle:"Lycée",
-    sous:"Sciences Physiques &amp; SVT" },
+  { slug:"2bac-pc-svt", cycle:"Lycée", annee:"2bac", anneeNom:"2<sup>ème</sup> BAC",
+    court:"2BAC PC & SVT", filiere:"PC &amp; SVT",     sous:"Sciences Physiques &amp; SVT" },
 
-  { slug:"2bac-sm",     nom:"2<sup>ème</sup> BAC", court:"2BAC SM",       cycle:"Lycée",
-    sous:"Sciences Maths A &amp; B" },
+  { slug:"2bac-sm",     cycle:"Lycée", annee:"2bac", anneeNom:"2<sup>ème</sup> BAC",
+    court:"2BAC SM",       filiere:"Sciences Maths",   sous:"Sciences Maths A &amp; B" },
 
-  { slug:"1bac-se",     nom:"1<sup>ère</sup> BAC", court:"1BAC SE",       cycle:"Lycée",
-    sous:"Sciences Expérimentales" },
+  { slug:"1bac-se",     cycle:"Lycée", annee:"1bac", anneeNom:"1<sup>ère</sup> BAC",
+    court:"1BAC SE",       filiere:"Sciences Exp.",    sous:"Sciences Expérimentales" },
 
-  { slug:"1bac-sm",     nom:"1<sup>ère</sup> BAC", court:"1BAC SM",       cycle:"Lycée",
-    sous:"Sciences Mathématiques" },
+  { slug:"1bac-sm",     cycle:"Lycée", annee:"1bac", anneeNom:"1<sup>ère</sup> BAC",
+    court:"1BAC SM",       filiere:"Sciences Maths",   sous:"Sciences Mathématiques" },
 
-  { slug:"tcs",         nom:"Tronc Commun",        court:"TCS",           cycle:"Lycée",
-    sous:"Sciences" },
+  { slug:"tcs",         cycle:"Lycée", annee:"tc",   anneeNom:"Tronc Commun",
+    court:"TCS",           filiere:"Sciences",         sous:"Tronc Commun Sciences" },
 
   /* ================= COLLÈGE ================= */
-  { slug:"3apic", nom:"3<sup>ème</sup> Année", court:"3APIC", cycle:"Collège", sous:"Troisième année" },
-  { slug:"2apic", nom:"2<sup>ème</sup> Année", court:"2APIC", cycle:"Collège", sous:"Deuxième année" },
-  { slug:"1apic", nom:"1<sup>ère</sup> Année", court:"1APIC", cycle:"Collège", sous:"Première année" }
+  { slug:"3apic", cycle:"Collège", annee:"3apic", anneeNom:"3<sup>ème</sup> Année",
+    court:"3APIC", filiere:"", sous:"Troisième année collège" },
+
+  { slug:"2apic", cycle:"Collège", annee:"2apic", anneeNom:"2<sup>ème</sup> Année",
+    court:"2APIC", filiere:"", sous:"Deuxième année collège" },
+
+  { slug:"1apic", cycle:"Collège", annee:"1apic", anneeNom:"1<sup>ère</sup> Année",
+    court:"1APIC", filiere:"", sous:"Première année collège" }
 ];
 
 
 /* ---------------------------------------------------------------------
-   2) LES DEUX CYCLES  (le premier écran de l'accueil)
+   2) LES DEUX CYCLES  (le premier choix, sur l'accueil)
    --------------------------------------------------------------------- */
 const CYCLES = [
   { id:"Lycée",   titre:"Lycée",   sous:"Tronc Commun · 1BAC · 2BAC", note:"Du TC jusqu'à l'examen national" },

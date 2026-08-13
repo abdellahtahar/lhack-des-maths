@@ -32,6 +32,28 @@ const niveauParSlug = s => NIVEAUX.find(n => n.slug === s);
 const docsDe = (slug, type) => DOCUMENTS.filter(d => d.niveau === slug && (!type || d.type === type));
 const nbDocs = slug => DOCUMENTS.filter(d => d.niveau === slug).length;
 
+/* Les niveaux d'une année, et les années d'un cycle (dans l'ordre de NIVEAUX) */
+const niveauxDe = (cycle, annee) =>
+  NIVEAUX.filter(n => (!cycle || n.cycle === cycle) && (!annee || n.annee === annee));
+
+function anneesDe(cycle){
+  const vues = [];
+  niveauxDe(cycle).forEach(n => {
+    let a = vues.find(x => x.id === n.annee);
+    if (!a){ a = { id:n.annee, nom:n.anneeNom, cycle:n.cycle, niveaux:[] }; vues.push(a); }
+    a.niveaux.push(n);
+  });
+  return vues;
+}
+
+/* Le bon lien pour une année : direct si une seule filière */
+const lienAnnee = (a) =>
+  a.niveaux.length === 1
+    ? `niveau.html?n=${a.niveaux[0].slug}`
+    : `niveaux.html?c=${encodeURIComponent(a.cycle)}&a=${a.id}`;
+
+const totalDocs = liste => liste.reduce((t,n) => t + nbDocs(n.slug), 0);
+
 /* =====================================================================
    EN-TÊTE + PIED DE PAGE (injectés partout)
    ===================================================================== */
@@ -78,10 +100,10 @@ function monterChrome(){
         <div>
           <h5>Niveaux</h5>
           <ul>
+            <li><a href="niveaux.html?c=Lyc%C3%A9e">Lycée</a></li>
+            <li><a href="niveaux.html?c=Coll%C3%A8ge">Collège</a></li>
             <li><a href="niveau.html?n=2bac-pc-svt">2BAC PC &amp; SVT</a></li>
             <li><a href="niveau.html?n=2bac-sm">2BAC Sciences Maths</a></li>
-            <li><a href="index.html#niveaux">Tous les niveaux</a></li>
-            <li><a href="index.html#moi">Qui suis-je</a></li>
           </ul>
         </div>
         <div>
@@ -173,62 +195,80 @@ function interactions(){
 }
 
 /* =====================================================================
-   RENDU : GRILLE DES NIVEAUX
+   RENDU : LE CHOIX DU CYCLE (Collège / Lycée) — sur l'accueil
+   Chaque carte envoie vers niveaux.html
    ===================================================================== */
-function rendreNiveaux(cible, cycle){
+function rendreCycles(cible){
   const box = $(cible); if (!box) return;
-  const liste = NIVEAUX.filter(n => !cycle || n.cycle === cycle);
-
-  box.innerHTML = `
-    <div class="grille-niv">
-      ${liste.map((n,i) => `
-        <a class="carte-niv" href="niveau.html?n=${n.slug}" data-rideau="${n.court}"
-           style="animation-delay:${i*55}ms">
-          <span class="niv-tag">${n.court}</span>
-          <h4>${n.nom}</h4>
-          <p class="niv-sous">${n.sous}</p>
-          <div class="niv-bas">
-            <span class="niv-nb">${nbDocs(n.slug)} doc${nbDocs(n.slug) > 1 ? 's' : ''}</span>
-            <span class="niv-fleche">${ICO.fleche}</span>
-          </div>
-        </a>`).join('')}
-    </div>`;
-}
-
-/* =====================================================================
-   RENDU : LE CHOIX DU CYCLE (Collège / Lycée)
-   ===================================================================== */
-function rendreCycles(cible, cibleNiveaux){
-  const box = $(cible); if (!box) return;
-
-  const nbDuCycle = c => NIVEAUX.filter(n => n.cycle === c)
-                                .reduce((t,n) => t + nbDocs(n.slug), 0);
 
   box.innerHTML = CYCLES.map((c,i) => `
-    <button class="carte-cycle rev rev-d${i+1}" data-cycle="${c.id}">
+    <a class="carte-cycle rev rev-d${i+1}"
+       href="niveaux.html?c=${encodeURIComponent(c.id)}" data-rideau="${c.titre}">
       <span class="cyc-ico">${c.id === 'Lycée' ? ICO.chapeau : ICO.sac}</span>
       <h3>${c.titre}</h3>
       <p class="cyc-sous">${c.sous}</p>
       <p class="cyc-note">${c.note}</p>
-      <span class="cyc-nb">${nbDuCycle(c.id)} documents</span>
-    </button>`).join('');
+      <span class="cyc-nb">${totalDocs(niveauxDe(c.id))} documents ${ICO.fleche}</span>
+    </a>`).join('');
+}
 
-  const choisir = (cy) => {
-    $$('.carte-cycle', box).forEach(b => b.classList.toggle('on', b.dataset.cycle === cy));
-    rendreNiveaux(cibleNiveaux, cy);
-    const t = $('#titre-niveaux');
-    if (t) t.textContent = cy;
-  };
+/* =====================================================================
+   RENDU : LES ANNÉES D'UN CYCLE   (Tronc Commun · 1ère BAC · 2ème BAC)
+   ===================================================================== */
+function rendreAnnees(cible, cycle){
+  const box = $(cible); if (!box) return;
+  const annees = anneesDe(cycle);
 
-  $$('.carte-cycle', box).forEach(b => {
-    b.addEventListener('click', () => {
-      choisir(b.dataset.cycle);
-      const g = $(cibleNiveaux);
-      if (g) g.scrollIntoView({ behavior:'smooth', block:'start' });
-    });
-  });
+  box.innerHTML = `
+    <div class="grille-niv">
+      ${annees.map((a,i) => {
+        const n = totalDocs(a.niveaux);
+        const detail = a.niveaux.length > 1
+          ? a.niveaux.map(x => x.filiere).join(' &nbsp;·&nbsp; ')
+          : a.niveaux[0].sous;
+        return `
+        <a class="carte-niv" href="${lienAnnee(a)}" data-rideau="${a.nom.replace(/<[^>]+>/g,'')}"
+           style="animation-delay:${i*60}ms">
+          <span class="niv-tag">${cycle}</span>
+          <h4>${a.nom}</h4>
+          <p class="niv-sous">${detail}</p>
+          <div class="niv-bas">
+            <span class="niv-nb">${n} doc${n > 1 ? 's' : ''}</span>
+            <span class="niv-fleche">${ICO.fleche}</span>
+          </div>
+        </a>`;
+      }).join('')}
+    </div>`;
+}
 
-  choisir('Lycée');   // choix par défaut
+/* =====================================================================
+   RENDU : LES FILIÈRES D'UNE ANNÉE   (PC & SVT · Sciences Maths)
+   ===================================================================== */
+function rendreFilieres(cible, cycle, annee){
+  const box = $(cible); if (!box) return;
+  const liste = niveauxDe(cycle, annee);
+
+  box.innerHTML = `
+    <div class="grille-fil">
+      ${liste.map((n,i) => {
+        const c = docsDe(n.slug,'cours').length,
+              e = docsDe(n.slug,'exercices').length,
+              d = docsDe(n.slug,'devoirs').length;
+        return `
+        <a class="carte-fil" href="niveau.html?n=${n.slug}" data-rideau="${n.court}"
+           style="animation-delay:${i*70}ms">
+          <span class="fil-tag">${n.court}</span>
+          <h3>${n.filiere || n.sous}</h3>
+          <p class="fil-sous">${n.sous}</p>
+          <div class="fil-chiffres">
+            <span><b>${c}</b>Cours</span>
+            <span><b>${e}</b>Exercices</span>
+            <span><b>${d}</b>Devoirs</span>
+          </div>
+          <span class="fil-cta">Ouvrir ${ICO.fleche}</span>
+        </a>`;
+      }).join('')}
+    </div>`;
 }
 
 /* =====================================================================

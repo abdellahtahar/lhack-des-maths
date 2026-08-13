@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -19,9 +19,8 @@
 
 <section class="entete-page">
   <div class="wrap">
-    <nav class="fil" id="fil">
-      <a href="index.html">Accueil</a><i>/</i>
-      <a href="index.html#niveaux">Niveaux</a>
+    <nav class="fil-ariane" id="fil">
+      <a href="index.html">Accueil</a>
     </nav>
     <span class="badge-niv" id="badge">Bibliothèque</span>
     <h1 id="titre">Tous les documents</h1>
@@ -57,8 +56,8 @@
 
 <div id="slot-pied"></div>
 
-<script src="js/data.js?v=6"></script>
-<script src="js/app.js?v=6"></script>
+<script src="js/data.js?v=7"></script>
+<script src="js/app.js?v=7"></script>
 <script>
 let ETAT = { slug:null, type:'', q:'' };
 
@@ -108,7 +107,9 @@ function avantInteractions(){
     document.title = niv.court + ' — Bibliothèque';
     document.getElementById('badge').textContent = niv.court;
     document.getElementById('fil').insertAdjacentHTML('beforeend',
-      `<i>/</i><a href="niveau.html?n=${niv.slug}">${niv.court}</a><i>/</i><b>${ETAT.type ? RAYONS[ETAT.type].titre : 'Tout'}</b>`);
+      `<i>/</i><a href="niveaux.html?c=${encodeURIComponent(niv.cycle)}">${niv.cycle}</a>` +
+      `<i>/</i><a href="niveau.html?n=${niv.slug}">${niv.court}</a>` +
+      `<i>/</i><b>${ETAT.type ? RAYONS[ETAT.type].titre : 'Tout'}</b>`);
     document.getElementById('titre').innerHTML =
       (ETAT.type ? RAYONS[ETAT.type].titre : 'Tous les documents') + ' <span class="violet-txt">· ' + niv.court + '</span>';
     document.getElementById('sous').textContent = ETAT.type ? RAYONS[ETAT.type].desc : niv.sous;

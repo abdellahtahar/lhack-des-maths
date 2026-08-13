@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -62,7 +62,7 @@
             <div class="pt-main">Bienvenue dans<br>le cahier ✎</div>
             <div class="pt-sub">Chapitre 0 — Comment ça marche</div>
           </div>
-          <div class="page-formule">1. Ton cycle &nbsp;→&nbsp; 2. Ton niveau &nbsp;→&nbsp; 3. Cours / Exercices / Devoirs</div>
+          <div class="page-formule">1. Ton cycle &nbsp;→&nbsp; 2. Ton année &nbsp;→&nbsp; 3. Ta filière &nbsp;→&nbsp; 4. Le PDF</div>
           <svg viewBox="0 0 260 110" fill="none" aria-hidden="true">
             <path d="M12 100 H250" stroke="#6722A0" stroke-opacity=".35" stroke-width="1.4"/>
             <path d="M20 8 V104" stroke="#6722A0" stroke-opacity=".35" stroke-width="1.4"/>
@@ -113,16 +113,14 @@
     <div class="rev">
       <span class="kicker">Étape 1</span>
       <h2 class="h-sec">Collège ou <span class="surligne">lycée</span> ?</h2>
-      <p class="sous-sec">Choisis ton cycle, puis ton niveau. Chaque niveau a ses cours, ses exercices et ses devoirs, rangés séparément.</p>
+      <p class="sous-sec">Choisis ton cycle, puis ton année, puis ta filière. Trois clics et tu es sur tes documents.</p>
     </div>
 
     <div class="grille-cycles" id="grille-cycles" style="margin-top:30px"></div>
 
-    <div class="cycle-titre" style="margin-top:44px">
-      <h3 id="titre-niveaux">Lycée</h3>
-      <div class="trait"></div>
+    <div class="chemin rev" aria-hidden="true">
+      <span>Cycle</span><i>→</i><span>Année</span><i>→</i><span>Filière</span><i>→</i><span>Cours · Exercices · Devoirs</span>
     </div>
-    <div id="grille-niveaux"></div>
 
   </div>
 </section>
@@ -265,13 +263,13 @@
 
 <div id="slot-pied"></div>
 
-<script src="js/data.js?v=6"></script>
-<script src="js/app.js?v=6"></script>
+<script src="js/data.js?v=7"></script>
+<script src="js/app.js?v=7"></script>
 <script>
 function avantInteractions(){
 
   /* ---- Cycle puis niveaux ---- */
-  rendreCycles('#grille-cycles', '#grille-niveaux');
+  rendreCycles('#grille-cycles');
 
   /* ---- Compteurs ---- */
   document.getElementById('s-doc').textContent = DOCUMENTS.length;

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Choisir son niveau — L'Hack Des Maths</title>
+<meta name="description" content="Choisissez votre année puis votre filière : cours, exercices et devoirs de mathématiques en PDF.">
+<meta name="theme-color" content="#0C0912">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body>
+
+<div id="slot-nav"></div>
+
+<section class="entete-page">
+  <div class="wrap">
+    <nav class="fil-ariane" id="ariane"></nav>
+    <span class="badge-niv" id="badge">—</span>
+    <h1 id="titre">—</h1>
+    <p id="sous">—</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:34px">
+  <div class="wrap">
+    <div id="grille"></div>
+
+    <div style="margin-top:38px; display:flex; gap:12px; flex-wrap:wrap">
+      <a href="#" class="btn btn-3" id="retour">← Retour</a>
+    </div>
+  </div>
+</section>
+
+<div id="slot-pied"></div>
+
+<script src="js/data.js?v=7"></script>
+<script src="js/app.js?v=7"></script>
+<script>
+function avantInteractions(){
+  const cycle = params.get('c');
+  const annee = params.get('a');
+
+  const cyc = CYCLES.find(c => c.id === cycle);
+
+  /* --- Cycle inconnu --- */
+  if (!cyc){
+    document.getElementById('badge').style.display = 'none';
+    document.getElementById('titre').textContent = 'Page introuvable';
+    document.getElementById('sous').textContent  = "Reviens à l'accueil pour choisir ton cycle.";
+    document.getElementById('retour').href = 'index.html#niveaux';
+    document.getElementById('retour').textContent = "← Retour à l'accueil";
+    return;
+  }
+
+  const ariane = document.getElementById('ariane');
+
+  /* ================= ÉTAPE 2 : LES ANNÉES ================= */
+  if (!annee){
+    document.title = cyc.titre + ' — L\'Hack Des Maths';
+    ariane.innerHTML =
+      `<a href="index.html">Accueil</a><i>/</i><b>${cyc.titre}</b>`;
+    document.getElementById('badge').textContent = 'Étape 2';
+    document.getElementById('titre').innerHTML =
+      'Ton année au <span class="violet-txt">' + cyc.titre.toLowerCase() + '</span> ?';
+    document.getElementById('sous').textContent = cyc.sous.replace(/·/g, '·');
+
+    rendreAnnees('#grille', cycle);
+
+    document.getElementById('retour').href = 'index.html#niveaux';
+    document.getElementById('retour').textContent = '← Changer de cycle';
+    return;
+  }
+
+  /* ================= ÉTAPE 3 : LES FILIÈRES ================= */
+  const groupe = anneesDe(cycle).find(a => a.id === annee);
+
+  if (!groupe){
+    document.getElementById('titre').textContent = 'Année introuvable';
+    document.getElementById('sous').textContent  = 'Choisis une année dans la liste.';
+    document.getElementById('badge').style.display = 'none';
+    document.getElementById('retour').href = 'niveaux.html?c=' + encodeURIComponent(cycle);
+    return;
+  }
+
+  const nomPropre = groupe.nom.replace(/<[^>]+>/g, '');
+  document.title = nomPropre + ' — L\'Hack Des Maths';
+  ariane.innerHTML =
+    `<a href="index.html">Accueil</a><i>/</i>` +
+    `<a href="niveaux.html?c=${encodeURIComponent(cycle)}">${cyc.titre}</a><i>/</i>` +
+    `<b>${nomPropre}</b>`;
+  document.getElementById('badge').textContent = 'Étape 3';
+  document.getElementById('titre').innerHTML = groupe.nom + ' — <span class="violet-txt">ta filière ?</span>';
+  document.getElementById('sous').textContent =
+    'Le programme de maths est le même à l\'intérieur de chaque filière.';
+
+  rendreFilieres('#grille', cycle, annee);
+
+  document.getElementById('retour').href = 'niveaux.html?c=' + encodeURIComponent(cycle);
+  document.getElementById('retour').textContent = '← Changer d\'année';
+}
+</script>
+</body>
+</html>
