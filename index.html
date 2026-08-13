@@ -9,11 +9,12 @@
 <meta property="og:title" content="L'Hack Des Maths — Prof. Abdellah Tahar">
 <meta property="og:description" content="Cours, exercices et devoirs de maths en PDF, du collège au bac.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236722A0'/><text x='50' y='72' font-size='64' font-family='Georgia' text-anchor='middle' fill='%23FFD900'>∑</text></svg>">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -28,20 +29,20 @@
       <h1 id="h1-heros">
         <span class="ligne"><i>Les maths,</i></span>
         <span class="ligne"><i>enfin <span class="surligne" id="surl-hero">claires</span>.</i></span>
-        <span class="ligne"><i class="violet-txt">Du collège au bac.</i></span>
+        <span class="ligne"><i class="violet-txt">Spécial 2BAC PC &amp; SVT.</i></span>
       </h1>
       <p class="heros-p">
-        Un seul cahier pour tout le programme marocain : <strong>cours</strong> résumés,
-        <strong>exercices</strong> corrigés et <strong>devoirs</strong> types.
-        Tu choisis ton niveau, tu choisis ton rayon, tu télécharges. C'est tout.
+        Tout le programme de <strong>2<sup>ème</sup> année BAC Sciences Physiques et SVT</strong> :
+        <strong>cours</strong> résumés, <strong>exercices</strong> corrigés et <strong>devoirs</strong> types —
+        à télécharger en PDF, gratuitement. Les autres niveaux sont là aussi.
       </p>
       <div class="heros-btns">
-        <a href="#niveaux" class="btn btn-2">Choisir mon niveau</a>
-        <a href="#moi" class="btn btn-3">Qui suis-je ?</a>
+        <a href="#focus" class="btn btn-2">2BAC PC &amp; SVT</a>
+        <a href="#niveaux" class="btn btn-3">Autres niveaux</a>
       </div>
       <div class="heros-stats">
-        <div class="stat"><b id="s-niv">11</b><span>Niveaux</span></div>
-        <div class="stat"><b id="s-doc">20</b><span>Documents</span></div>
+        <div class="stat"><b id="s-doc">60</b><span>Documents</span></div>
+        <div class="stat"><b id="s-niv">10</b><span>Niveaux</span></div>
         <div class="stat"><b>3</b><span>Rayons</span></div>
         <div class="stat"><b>100%</b><span>Gratuit</span></div>
       </div>
@@ -98,18 +99,30 @@
 <!-- ========================== BANDEAU ============================ -->
 <div class="bandeau" aria-hidden="true">
   <div class="bandeau-piste">
-    <span>Cours résumés</span><span>Exercices corrigés</span><span>Devoirs surveillés</span>
-    <span>Examens nationaux</span><span>Du collège au bac</span><span>PDF gratuits</span>
-    <span>Cours résumés</span><span>Exercices corrigés</span><span>Devoirs surveillés</span>
-    <span>Examens nationaux</span><span>Du collège au bac</span><span>PDF gratuits</span>
+    <span>2BAC Sciences Physiques</span><span>2BAC SVT</span><span>Cours résumés</span>
+    <span>Exercices corrigés</span><span>Devoirs surveillés</span><span>Examens nationaux</span><span>PDF gratuits</span>
+    <span>2BAC Sciences Physiques</span><span>2BAC SVT</span><span>Cours résumés</span>
+    <span>Exercices corrigés</span><span>Devoirs surveillés</span><span>Examens nationaux</span><span>PDF gratuits</span>
   </div>
 </div>
 
-<!-- ========================== NIVEAUX ============================ -->
-<section class="section" id="niveaux">
+<!-- ===================== FOCUS 2BAC PC / SVT ===================== -->
+<section class="section" id="focus">
   <div class="wrap">
     <div class="rev">
-      <span class="kicker">Étape 1</span>
+      <span class="kicker">Ma spécialité</span>
+      <h2 class="h-sec">2<sup>ème</sup> BAC <span class="surligne">PC &amp; SVT</span></h2>
+      <p class="sous-sec">C'est là que je passe l'essentiel de mon année. Programme complet, chapitre par chapitre, du premier cours de septembre jusqu'à l'examen national.</p>
+    </div>
+    <div class="grille-focus" id="grille-focus" style="margin-top:34px"></div>
+  </div>
+</section>
+
+<!-- ========================== NIVEAUX ============================ -->
+<section class="section" id="niveaux" style="padding-top:0">
+  <div class="wrap">
+    <div class="rev">
+      <span class="kicker">Tous les niveaux</span>
       <h2 class="h-sec">Choisis <span class="surligne">ton niveau</span></h2>
       <p class="sous-sec">Chaque niveau a son propre rayon : les cours d'un côté, les exercices de l'autre, les devoirs à part. Rien n'est mélangé.</p>
     </div>
@@ -148,8 +161,9 @@
       <span class="kicker">Qui suis-je</span>
       <h2>Je m'appelle <span class="violet-txt">Abdellah Tahar</span>, et j'enseigne les maths autrement.</h2>
       <p>
-        Professeur de mathématiques à <strong>Fès</strong>, j'accompagne chaque année des élèves du
-        collège jusqu'à la <strong>2ème année du baccalauréat</strong> au <strong>Centre Pascal</strong>.
+        Professeur de mathématiques à <strong>Fès</strong>, au <strong>Centre Pascal</strong>.
+        Je suis surtout les classes de <strong>2<sup>ème</sup> BAC Sciences Physiques</strong> et
+        <strong>2<sup>ème</sup> BAC SVT</strong> — c'est mon terrain, celui où je prépare mes élèves à l'examen national.
       </p>
       <p>
         J'ai créé <strong>L'Hack Des Maths</strong> pour une raison simple : trop d'élèves travaillent dur
@@ -164,7 +178,7 @@
       <div class="bio-points">
         <div class="bio-point">
           <span></span>
-          <div><b>Programme marocain</b><span>100 % conforme, à jour 2026</span></div>
+          <div><b>Spécialiste 2BAC PC &amp; SVT</b><span>Programme officiel, chapitre par chapitre</span></div>
         </div>
         <div class="bio-point">
           <span></span>
@@ -222,10 +236,15 @@
   <div class="wrap">
     <div class="cta rev">
       <h2>Une question sur un exercice ?</h2>
-      <p>Écris-moi directement. Je réponds aux élèves, aux parents et aux collègues professeurs.</p>
+      <p>Appelle-moi ou écris-moi directement. Je réponds aux élèves, aux parents et aux collègues professeurs.</p>
       <div class="cta-btns">
         <a class="btn btn-2" id="lien-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="btn btn-3" id="lien-mail" href="#">Envoyer un e-mail</a>
+        <a class="btn btn-3" id="lien-tel" href="#">Appeler</a>
+        <a class="btn btn-3" id="lien-mail" href="#">E-mail</a>
+      </div>
+      <div class="cta-reseaux">
+        <a id="lien-yt" href="#" target="_blank" rel="noopener"></a>
+        <a id="lien-ig" href="#" target="_blank" rel="noopener"></a>
       </div>
     </div>
   </div>
@@ -233,11 +252,12 @@
 
 <div id="slot-pied"></div>
 
-<script src="js/data.js"></script>
-<script src="js/app.js"></script>
+<script src="js/data.js?v=5"></script>
+<script src="js/app.js?v=5"></script>
 <script>
 function avantInteractions(){
   /* Contenus dynamiques */
+  rendreVedettes('#grille-focus');
   rendreNiveaux('#grille-niveaux');
   rendreRayons('#grille-rayons', null);
 
@@ -250,13 +270,27 @@ function avantInteractions(){
 
   /* Boutons héros / contact */
   const b = document.querySelector('.heros-btns .btn-2');
-  if (b) b.innerHTML = ICO.bas + ' Choisir mon niveau';
+  if (b) b.innerHTML = ICO.bas + ' 2BAC PC &amp; SVT';
+
   const wa = document.getElementById('lien-wa');
   wa.href = 'https://wa.me/' + SITE.whatsapp;
-  wa.innerHTML = ICO.wa + ' WhatsApp';
+  wa.innerHTML = ICO.wa + ' WhatsApp ' + SITE.tel;
+
+  const tl = document.getElementById('lien-tel');
+  tl.href = 'tel:+' + SITE.whatsapp;
+  tl.innerHTML = ICO.tel + ' ' + SITE.tel;
+
   const ml = document.getElementById('lien-mail');
   ml.href = 'mailto:' + SITE.email;
-  ml.innerHTML = ICO.mail + ' Envoyer un e-mail';
+  ml.innerHTML = ICO.mail + ' E-mail';
+
+  const yt = document.getElementById('lien-yt');
+  yt.href = SITE.youtube;
+  yt.innerHTML = ICO.yt + ' ' + SITE.ytNom;
+
+  const ig = document.getElementById('lien-ig');
+  ig.href = SITE.instagram;
+  ig.innerHTML = ICO.insta + ' ' + SITE.instaNom;
 
   /* Ouverture du cahier */
   const cahier = document.getElementById('cahier');

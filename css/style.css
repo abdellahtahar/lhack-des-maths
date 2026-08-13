@@ -111,6 +111,7 @@ button{ font:inherit; cursor:pointer; border:0; background:none; color:inherit; 
 .kicker::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--jaune); box-shadow:0 0 10px var(--jaune); }
 
 h1,h2,h3,h4{ font-family:var(--f-titre); font-weight:800; line-height:1.08; letter-spacing:-.025em; }
+h1 sup, h2 sup, h3 sup, h4 sup, .heros-p sup, .bio p sup{ font-size:.52em; vertical-align:super; line-height:0; letter-spacing:0; }
 
 .h-sec{ font-size:clamp(30px,5.2vw,54px); margin-bottom:16px; }
 .sous-sec{ color:var(--gris); font-size:clamp(15px,1.7vw,18px); max-width:56ch; }
@@ -384,6 +385,59 @@ h1,h2,h3,h4{ font-family:var(--f-titre); font-weight:800; line-height:1.08; lett
 
 
 /* ---------------------------------------------------------------
+   5b. NIVEAUX MIS EN AVANT (2BAC PC / SVT)
+   --------------------------------------------------------------- */
+.grille-focus{ display:grid; gap:20px; grid-template-columns:1fr; }
+@media (min-width:820px){ .grille-focus{ grid-template-columns:1fr 1fr; } }
+
+.carte-focus{
+  position:relative; overflow:hidden; display:flex; flex-direction:column;
+  padding:34px 30px 30px; border-radius:var(--r-xl); isolation:isolate;
+  background:linear-gradient(150deg, rgba(103,34,160,.55), var(--encre-3) 62%, var(--encre-2));
+  border:1px solid rgba(155,77,224,.35);
+  transition:transform .55s var(--spring), box-shadow .5s var(--ease), border-color .4s;
+  min-height:270px;
+}
+.carte-focus::before{
+  content:""; position:absolute; inset:0; z-index:-1; opacity:.32;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px);
+  background-size:22px 22px;
+  mask-image:linear-gradient(150deg,#000,transparent 65%);
+}
+.carte-focus::after{
+  content:""; position:absolute; z-index:-1; right:-70px; top:-70px;
+  width:210px; height:210px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,217,0,.35), transparent 68%);
+  transition:transform .7s var(--ease);
+}
+.carte-focus:hover{ transform:translateY(-9px); border-color:var(--jaune); box-shadow:var(--ombre-l), var(--lueur); }
+.carte-focus:hover::after{ transform:scale(1.35); }
+
+.focus-etoile{
+  align-self:flex-start;
+  font-family:var(--f-mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--encre); background:var(--jaune);
+  padding:5px 11px; border-radius:100px; margin-bottom:16px;
+}
+.focus-tag{ font-family:var(--f-mono); font-size:11px; letter-spacing:.2em; color:var(--jaune); }
+.carte-focus h3{ font-size:clamp(26px,3.6vw,34px); margin:6px 0 18px; }
+.carte-focus h3 em{ display:block; font-style:normal; font-size:.58em; font-weight:600; color:rgba(251,249,244,.75); letter-spacing:-.01em; margin-top:4px; }
+
+.focus-chiffres{ display:flex; gap:10px; flex-wrap:wrap; margin-top:auto; }
+.focus-chiffres span{
+  flex:1; min-width:78px; text-align:center;
+  padding:12px 8px; border-radius:16px;
+  background:rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.1);
+  font-family:var(--f-mono); font-size:9.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--gris);
+}
+.focus-chiffres b{ display:block; font-family:var(--f-titre); font-size:22px; color:var(--jaune); letter-spacing:-.02em; }
+
+.focus-cta{ display:flex; align-items:center; gap:9px; margin-top:20px; font-weight:700; font-size:14.5px; color:var(--jaune); }
+.focus-cta svg{ width:16px; height:16px; transition:transform .4s var(--spring); }
+.carte-focus:hover .focus-cta svg{ transform:translateX(6px); }
+
+
+/* ---------------------------------------------------------------
    6. CARTES NIVEAUX
    --------------------------------------------------------------- */
 .cycle-titre{ display:flex; align-items:center; gap:14px; margin:44px 0 20px; }
@@ -580,6 +634,14 @@ h1,h2,h3,h4{ font-family:var(--f-titre); font-weight:800; line-height:1.08; lett
 .cta h2{ font-size:clamp(28px,5vw,48px); margin-bottom:14px; }
 .cta p{ color:rgba(251,249,244,.78); max-width:52ch; margin:0 auto 30px; }
 .cta-btns{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+.cta-reseaux{ display:flex; flex-wrap:wrap; gap:22px; justify-content:center; margin-top:26px; }
+.cta-reseaux a{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.06em;
+  color:rgba(251,249,244,.72); transition:color .3s, transform .3s var(--spring);
+}
+.cta-reseaux a svg{ width:18px; height:18px; }
+.cta-reseaux a:hover{ color:var(--jaune); transform:translateY(-2px); }
 
 
 /* ---------------------------------------------------------------
@@ -717,6 +779,22 @@ h1,h2,h3,h4{ font-family:var(--f-titre); font-weight:800; line-height:1.08; lett
 /* Barre de progression de lecture */
 .progres{ position:fixed; top:0; left:0; height:3px; z-index:200; width:0;
   background:linear-gradient(90deg,var(--violet-clair),var(--jaune)); box-shadow:0 0 12px rgba(255,217,0,.6); transition:width .12s linear; }
+
+/* Bouton WhatsApp flottant */
+.wa-flottant{
+  position:fixed; left:20px; bottom:20px; z-index:91;
+  display:inline-flex; align-items:center; gap:9px;
+  padding:13px 18px; border-radius:100px;
+  background:#25D366; color:#062d14; font-weight:700; font-size:14px;
+  box-shadow:0 14px 34px -12px rgba(37,211,102,.85);
+  transition:transform .4s var(--spring), box-shadow .4s;
+}
+.wa-flottant svg{ width:20px; height:20px; flex:none; }
+.wa-flottant:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 20px 40px -12px rgba(37,211,102,1); }
+@media (max-width:560px){
+  .wa-flottant span{ display:none; }
+  .wa-flottant{ padding:14px; }
+}
 
 /* Bouton haut */
 .haut{

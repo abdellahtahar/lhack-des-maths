@@ -1,11 +1,11 @@
 {
   "name": "L'Hack Des Maths",
   "short_name": "L'Hack Maths",
-  "description": "Cours, exercices corriges et controles de mathematiques en PDF, du college au baccalaureat.",
+  "description": "Cours, exercices corriges et devoirs de mathematiques en PDF - special 2BAC Sciences Physiques et SVT.",
   "lang": "fr",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FBFAF6",
-  "theme_color": "#141B34",
+  "background_color": "#0C0912",
+  "theme_color": "#6722A0",
   "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
 }

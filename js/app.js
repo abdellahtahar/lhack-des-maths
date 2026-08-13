@@ -14,7 +14,10 @@ const ICO = {
   clock:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
   check:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
   wa:      '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.13c-.24.68-1.42 1.31-1.95 1.36-.5.05-.98.24-3.3-.69-2.77-1.1-4.53-3.94-4.67-4.13-.13-.19-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.53-.34.71-.34.18 0 .35 0 .51.01.16.01.38-.06.6.46.24.55.79 1.9.86 2.04.07.14.12.3.02.49-.09.19-.14.3-.28.47-.14.16-.3.36-.42.49-.14.14-.29.29-.12.57.16.28.72 1.19 1.55 1.93 1.07.95 1.97 1.25 2.25 1.39.28.14.44.12.6-.07.17-.19.7-.81.88-1.09.19-.28.37-.23.63-.14.25.09 1.6.75 1.88.89.28.14.46.21.53.32.06.11.06.65-.18 1.33z"/></svg>',
-  mail:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M3 7l9 6 9-6"/></svg>'
+  mail:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M3 7l9 6 9-6"/></svg>',
+  tel:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3h-2A1.6 1.6 0 003 4.7C3 13.1 10.9 21 19.3 21a1.6 1.6 0 001.7-1.6v-2a1.3 1.3 0 00-1-1.3l-3-.7a1.3 1.3 0 00-1.3.4l-1.1 1.3a13.6 13.6 0 01-5.7-5.7l1.3-1.1a1.3 1.3 0 00.4-1.3l-.7-3A1.3 1.3 0 006.6 3z"/></svg>',
+  insta:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>',
+  yt:      '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.33a2.78 2.78 0 00-1.95-1.96C18.86 4.25 12 4.25 12 4.25s-6.86 0-8.59.46A2.78 2.78 0 001.46 6.67C1 8.4 1 12 1 12s0 3.6.46 5.33a2.78 2.78 0 001.95 1.96c1.73.46 8.59.46 8.59.46s6.86 0 8.59-.46a2.78 2.78 0 001.95-1.96C23 15.6 23 12 23 12zM9.75 15.27V8.73L15.5 12z"/></svg>'
 };
 
 /* ---------- Petits helpers ---------- */
@@ -54,6 +57,7 @@ function monterChrome(){
     <a href="index.html#moi">Qui suis-je</a>
     <a href="index.html#methode">Méthode</a>
     <a href="index.html#contact">Contact</a>
+    <a href="https://wa.me/${SITE.whatsapp}" target="_blank" rel="noopener" style="color:#FFD900">WhatsApp ${SITE.tel}</a>
   </aside>
   <div class="progres" id="progres"></div>`;
 
@@ -69,21 +73,22 @@ function monterChrome(){
           <p>Des documents de mathématiques clairs, structurés et gratuits, du collège jusqu'au baccalauréat.</p>
         </div>
         <div>
-          <h5>Navigation</h5>
+          <h5>Niveaux</h5>
           <ul>
+            <li><a href="niveau.html?n=2bac-pc">2BAC Sciences Physiques</a></li>
+            <li><a href="niveau.html?n=2bac-svt">2BAC SVT</a></li>
             <li><a href="index.html#niveaux">Tous les niveaux</a></li>
-            <li><a href="index.html#rayons">Cours · Exercices · Devoirs</a></li>
             <li><a href="index.html#moi">Qui suis-je</a></li>
-            <li><a href="index.html#methode">La méthode</a></li>
           </ul>
         </div>
         <div>
           <h5>Contact</h5>
           <ul>
-            <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
+            <li><a href="tel:+${SITE.whatsapp}">${SITE.tel}</a></li>
             <li><a href="https://wa.me/${SITE.whatsapp}" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="${SITE.youtube}" target="_blank" rel="noopener">YouTube</a></li>
-            <li><a href="${SITE.instagram}" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
+            <li><a href="${SITE.youtube}" target="_blank" rel="noopener">YouTube ${SITE.ytNom}</a></li>
+            <li><a href="${SITE.instagram}" target="_blank" rel="noopener">Instagram ${SITE.instaNom}</a></li>
           </ul>
         </div>
       </div>
@@ -93,6 +98,7 @@ function monterChrome(){
       </div>
     </div>
   </footer>
+  <a class="wa-flottant" href="https://wa.me/${SITE.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICO.wa}<span>WhatsApp</span></a>
   <button class="haut" id="haut" aria-label="Remonter">${ICO.haut}</button>
   <div class="rideau" id="rideau"><span>…</span></div>`;
 
@@ -183,6 +189,33 @@ function rendreNiveaux(cible){
           </div>
         </a>`).join('')}
     </div>`).join('');
+}
+
+/* =====================================================================
+   RENDU : NIVEAUX MIS EN AVANT (vedette:true)
+   ===================================================================== */
+function rendreVedettes(cible){
+  const box = $(cible); if (!box) return;
+  const v = NIVEAUX.filter(n => n.vedette);
+  if (!v.length){ box.innerHTML = ''; return; }
+
+  box.innerHTML = v.map((n,i) => {
+    const c = docsDe(n.slug,'cours').length,
+          e = docsDe(n.slug,'exercices').length,
+          d = docsDe(n.slug,'devoirs').length;
+    return `
+    <a class="carte-focus rev rev-d${i+1}" href="niveau.html?n=${n.slug}" data-rideau="${n.court}">
+      <span class="focus-etoile">★ Spécialité du prof</span>
+      <span class="focus-tag">${n.court}</span>
+      <h3>${n.nom}<em>${n.sous}</em></h3>
+      <div class="focus-chiffres">
+        <span><b>${c}</b>Cours</span>
+        <span><b>${e}</b>Exercices</span>
+        <span><b>${d}</b>Devoirs</span>
+      </div>
+      <span class="focus-cta">Ouvrir le programme complet ${ICO.fleche}</span>
+    </a>`;
+  }).join('');
 }
 
 /* =====================================================================

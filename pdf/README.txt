@@ -2,25 +2,26 @@ DOSSIER PDF
 ===========
 
 1. Depose ton fichier ici, par exemple :
-   pdf/2bac-exponentielle-resume.pdf
-   pdf/2bac-exponentielle-exercices.pdf
+   pdf/2bac-pc-limites-cours.pdf
 
-2. Ouvre js/data.js, trouve le document, remplis "fichier" et "poids" :
+2. Ouvre js/data.js, trouve la ligne du document et remplis "fichier" :
 
-   { titre:'Fonction exponentielle', niveau:'2bac', symbole:'e^x',
-     type:'resume',
-     resume:"...", pages:4,
-     fichier:'pdf/2bac-exponentielle-resume.pdf',
-     poids:'820 Ko' }
+   { titre:"Limites et continuite", niveau:"2bac-pc", type:"cours",
+     chapitre:"Analyse - S1", pages:12, date:"2026-09-08",
+     fichier:"pdf/2bac-pc-limites-cours.pdf" },
 
-3. Le bouton "Telecharger" s'active tout seul.
+3. Le bouton "PDF" s'active tout seul.
    Tant que "fichier" est vide, la fiche s'affiche en "Bientot".
 
-LE CHAMP "type" DECIDE DE LA PARTIE :
-   type:'resume'      -> partie RESUMES DE COURS
-   type:'exercices'   -> partie EXERCICES
-   type:'controle'    -> partie CONTROLES & FORMULAIRES
-   type:'formulaire'  -> idem
+LE CHAMP "type" DECIDE DU RAYON :
+   type:"cours"      -> rayon COURS
+   type:"exercices"  -> rayon EXERCICES
+   type:"devoirs"    -> rayon DEVOIRS
+
+LE CHAMP "niveau" (slug pris dans NIVEAUX) :
+   2bac-pc  2bac-svt  2bac-sma  2bac-smb
+   1bac-se  1bac-sm   tcs
+   3apic    2apic     1apic
 
 Nomme tes fichiers en minuscules, sans accents ni espaces :
    niveau-chapitre-type.pdf
