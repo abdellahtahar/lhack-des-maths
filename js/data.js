@@ -97,7 +97,7 @@ const DOCUMENTS = [
   /* =================================================================
      2BAC PC & SVT
      ================================================================= */
-  { titre:"Limites et continuité",              niveau:"2bac-pc-svt", type:"cours", chapitre:"Analyse",      pages:12, date:"2026-09-08", fichier:"" },
+  { titre:"Limites et continuité",              niveau:"2bac-pc-svt", type:"cours", chapitre:"Analyse",      pages:12, date:"2026-09-08", fichier:"pdf/la continuite.pdf" },
   { titre:"Dérivation et étude des fonctions",  niveau:"2bac-pc-svt", type:"cours", chapitre:"Analyse",      pages:16, date:"2026-09-22", fichier:"" },
   { titre:"Suites numériques",                  niveau:"2bac-pc-svt", type:"cours", chapitre:"Analyse",      pages:10, date:"2026-10-06", fichier:"" },
   { titre:"Fonctions primitives",               niveau:"2bac-pc-svt", type:"cours", chapitre:"Analyse",      pages:6,  date:"2026-10-20", fichier:"" },
