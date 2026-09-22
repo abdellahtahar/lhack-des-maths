@@ -237,7 +237,7 @@ const PARCOURS = [
     sous:"Collège, lycée, classes supérieures — écoles privées et centres" },
   { titre:"3 livres de mathématiques",
     sous:"Programme du lycée, avec un focus sur la 2ème année du bac" },
-  { titre:"10 diplômes en UX/UI & Graphic Design",
+  { titre:"04 diplômes en UX/UI & Graphic Design",
     sous:"Certifications Adobe — d'où la clarté visuelle de mes documents" },
   { titre:"Formations en didactique",
     sous:"Pédagogie, gestion de classe et transmission" },
