@@ -8,7 +8,25 @@
   Cache-Control: public, max-age=600, must-revalidate
 
 /js/*
-  Cache-Control: public, max-age=600, must-revalidate
+  Cache-Control: no-store
+
+/
+  Cache-Control: no-cache
+
+/*.html
+  Cache-Control: no-cache
+
+/index
+  Cache-Control: no-cache
+
+/niveaux
+  Cache-Control: no-cache
+
+/niveau
+  Cache-Control: no-cache
+
+/bibliotheque
+  Cache-Control: no-cache
 
 /assets/*
   Cache-Control: public, max-age=86400

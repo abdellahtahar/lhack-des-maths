@@ -54,8 +54,20 @@ dans l'ordre du programme (septembre -> examen national).
 ## Contacts
 Objet `SITE` en bas de `js/data.js`.
 
-## Important : le cache
-Les fichiers CSS et JS sont appeles avec `?v=7`.
-**A chaque fois que tu modifies `css/style.css` ou `js/*.js`, incremente ce numero**
-(`?v=8`, `?v=9`, ...) dans les 3 fichiers HTML — sinon les visiteurs continuent
-de voir l'ancienne version gardee en cache par leur navigateur.
+## Mise a jour automatique des documents
+Apres avoir ajoute le PDF et modifie `js/data.js`, enregistre les changements
+sur la branche `main` de GitHub et attends la fin du deploiement Cloudflare Pages.
+La nouvelle liste est chargee a chaque ouverture ou actualisation d'une page.
+**Aucun numero de version a modifier dans les fichiers HTML pour les documents.**
+Une page deja ouverte doit etre actualisee pour voir les nouvelles fiches.
+
+Les quatre pages chargent `js/app.js?v=auto`, qui charge ensuite `js/data.js`
+avec une URL unique avant de construire les menus, compteurs et documents.
+`_headers` desactive le stockage des fichiers JavaScript et demande la
+revalidation des pages HTML, y compris leurs URL sans extension.
+Garde `?v=auto` tel quel : il sert a quitter l'ancienne URL du moteur.
+
+Les images, PDF et styles conservent leur cache habituel. Pour remplacer un PDF
+existant immediatement, utilise un nouveau nom et mets a jour son champ `fichier`.
+Pour modifier le design CSS, augmente encore sa version `?v=7` dans les quatre
+fichiers HTML. Cette version ne concerne pas l'ajout des documents.

@@ -322,8 +322,43 @@ function carteDoc(d, avecNiveau){
 /* =====================================================================
    DÉMARRAGE
    ===================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
-  monterChrome();
-  if (typeof avantInteractions === 'function') avantInteractions();
-  interactions();
-});
+function demarrerSite(){
+  /* Une URL neuve à chaque ouverture : aucun numéro à modifier dans le HTML. */
+  const source = new URL('js/data.js', document.baseURI);
+  source.searchParams.set('v', Date.now().toString(36) + '-' + Math.random().toString(36).slice(2));
+  const donnees = document.createElement('script');
+  donnees.src = source.href;
+
+  const signalerErreur = () => {
+    const message = document.createElement('div');
+    message.className = 'wrap';
+    message.setAttribute('role', 'alert');
+    message.style.paddingBlock = '110px 24px';
+    const texte = document.createElement('p');
+    texte.textContent = 'Impossible de charger les documents. Vérifie ta connexion, puis réessaie.';
+    const bouton = document.createElement('button');
+    bouton.className = 'btn btn-2';
+    bouton.textContent = 'Réessayer';
+    bouton.addEventListener('click', () => location.reload());
+    message.append(texte, bouton);
+    document.body.prepend(message);
+  };
+
+  donnees.onload = () => {
+    if (typeof DOCUMENTS === 'undefined' || typeof SITE === 'undefined'){
+      signalerErreur();
+      return;
+    }
+    monterChrome();
+    if (typeof avantInteractions === 'function') avantInteractions();
+    interactions();
+  };
+  donnees.onerror = signalerErreur;
+  document.head.append(donnees);
+}
+
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', demarrerSite, { once:true });
+} else {
+  demarrerSite();
+}
